@@ -5,39 +5,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
+    android:weightSum="4"
     tools:context="com.example.hardik.myapplication.MainActivity"
     tools:layout_editor_absoluteY="81dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        >
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="90"
+        android:layout_height="match_parent"
         android:background="#a45b5b"
         app:srcCompat="@drawable/logo" />
 
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
+        android:layout_height="match_parent"
+        android:layout_weight="3.5"
+        android:weightSum="2"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/login"
-            android:padding="0dp"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="50"
+            android:layout_weight="1"
             android:onClick="sendMessage"
             android:text="Login" />
 
         <Button
             android:id="@+id/register"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="50"
+            android:layout_weight="1"
             android:onClick="gotoRegister"
             android:text="Register" />
+
     </LinearLayout>
 </LinearLayout>
