@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "761175654614",
+    "firebase_url": "https://myapplication-4fcd2.firebaseio.com",
+    "project_id": "myapplication-4fcd2",
+    "storage_bucket": "myapplication-4fcd2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761175654614:android:e372606e3bd6ac15",
+        "android_client_info": {
+          "package_name": "com.example.hardik.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "761175654614-4vae20d47btai7utha02p2m9g2jsp1r0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hardik.myapplication",
+            "certificate_hash": "379e434055e3392233d8768fb8324f1ceea6845b"
+          }
+        },
+        {
+          "client_id": "761175654614-afetnrbvo2p0nccltjmd5dsr8utqni9f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChTgyA9uwmdjWj_xAvE0eDgCM3rmec8Jw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "761175654614-afetnrbvo2p0nccltjmd5dsr8utqni9f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
