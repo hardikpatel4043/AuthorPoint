@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home_page"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Homepage" />
+        <item
+            android:id="@+id/nav_booklist"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="BookList" />
+        <item
+            android:id="@+id/nav_author_list"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="AuthorList" />
+        <item
+            android:title="change password"
+            android:icon="@drawable/ic_menu_send"/>
+        <item
+            android:icon="@drawable/messenger_bubble_large_blue"
+            android:title="Inbox"/>
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Logout" />
+    </group>
+
+
+
+</menu>
