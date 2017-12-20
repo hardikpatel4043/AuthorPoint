@@ -26,7 +26,7 @@ public class register extends AppCompatActivity implements View.OnClickListener 
     private FirebaseUser user;
     private FirebaseAuth firebaseAuth;
     private EditText e,password,name,phone;
-    private Button regist;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +35,13 @@ public class register extends AppCompatActivity implements View.OnClickListener 
 
         firebaseAuth = FirebaseAuth.getInstance();
         ref=FirebaseDatabase.getInstance().getReference("Users");
-
         
         name=(EditText) findViewById(R.id.name);
         e=(EditText)findViewById(R.id.email);
         phone=(EditText)findViewById(R.id.phone);
         password=(EditText)findViewById(R.id.pass);
-        regist= (Button) findViewById(R.id.register);
-        regist.setOnClickListener(this);
+        Button reg= (Button) findViewById(R.id.register);
+        reg.setOnClickListener(this);
 
     }
 

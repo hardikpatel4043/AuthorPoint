@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -41,7 +42,7 @@ public class Home_page extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         TextView text=navigationView.getHeaderView(0).findViewById(R.id.textView);
-      //  text.setText(user.getEmail());
+        text.setText(user.getEmail());
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -115,12 +116,10 @@ public class Home_page extends AppCompatActivity
             fragmentTransaction.commit();
 
         } else if (id == R.id.nav_logout) {
-
-            FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
-            firebaseAuth.signOut();
-
-            //to stop user from login without password after logout
             finish();
+            LoginManager.getInstance().logOut();
+            FirebaseAuth.getInstance().signOut();
+            //to stop user from login without password after logout
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
         }
 
