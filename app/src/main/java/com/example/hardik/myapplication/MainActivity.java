@@ -19,17 +19,19 @@ public class MainActivity extends AppCompatActivity {
 
         if(firebaseAuth.getCurrentUser()!=null){
            startActivity(new Intent(getApplicationContext(),Home_page.class));
-           finish();
+
         }
     }
 
     public void sendMessage(View view){
           Intent intent =new Intent(this,login_page.class);
           startActivity(intent);
+
     }
     public void gotoRegister(View view){
         Intent intent=new Intent(this,register.class);
         startActivity(intent);
+
     }
 
 }

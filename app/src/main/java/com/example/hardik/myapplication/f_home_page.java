@@ -16,7 +16,6 @@ import com.example.hardik.myapplication.recycle_home.Book;
 import com.example.hardik.myapplication.recycle_home.BookAdapter;
 import com.example.hardik.myapplication.recycle_home.Event;
 import com.example.hardik.myapplication.recycle_home.EventAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +51,8 @@ public class f_home_page extends android.support.v4.app.Fragment {
         // Inflate the layout for this fragment
 
         View rootView=inflater.inflate(R.layout.fragment_f_home_page, container, false);
+
+
 
         recyclerView1 =  (RecyclerView) rootView.findViewById(R.id.recycler_book);
         bAdapter = new BookAdapter(context,bookList);

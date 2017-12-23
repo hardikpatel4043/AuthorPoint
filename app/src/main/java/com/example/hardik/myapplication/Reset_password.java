@@ -16,7 +16,6 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Reset_password extends AppCompatActivity {
 
     FirebaseAuth auth;
-    FirebaseAuth notauth;
     EditText email;
     Button resetButoon;
 

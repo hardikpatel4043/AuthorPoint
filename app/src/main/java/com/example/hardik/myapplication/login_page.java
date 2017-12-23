@@ -19,6 +19,7 @@ public class login_page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(login_page.this,SignInUser.class));
+
             }
         });
 

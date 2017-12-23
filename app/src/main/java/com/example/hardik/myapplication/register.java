@@ -27,7 +27,6 @@ public class register extends AppCompatActivity implements View.OnClickListener 
     private FirebaseAuth firebaseAuth;
     private EditText e,password,name,phone;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +86,7 @@ public class register extends AppCompatActivity implements View.OnClickListener 
                     ref.child(id).setValue(user);
 
                     Toast.makeText(register.this,"Succesfully Registerd",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(),Home_page.class));
+                    startActivity(new Intent(getApplicationContext(),SignInUser.class));
                 }else{
                     Toast.makeText(register.this,"Registeration Error",Toast.LENGTH_SHORT).show();
                 }

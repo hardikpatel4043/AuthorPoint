@@ -45,7 +45,6 @@ public class Home_page extends AppCompatActivity
         text.setText(user.getEmail());
         navigationView.setNavigationItemSelectedListener(this);
 
-
         //set homepage on loading
         FragmentTransaction tx=getSupportFragmentManager().beginTransaction();
         tx.replace(R.id.frame,new f_home_page()).commit();
@@ -95,7 +94,6 @@ public class Home_page extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         if (id == R.id.nav_home_page) {
             // Handle the camera action
             setTitle("Homepage");
@@ -119,10 +117,10 @@ public class Home_page extends AppCompatActivity
             finish();
             LoginManager.getInstance().logOut();
             FirebaseAuth.getInstance().signOut();
-            //to stop user from login without password after logout
+
+            //To stop user from login without password after logout
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

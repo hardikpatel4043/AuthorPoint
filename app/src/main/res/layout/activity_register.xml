@@ -86,6 +86,8 @@
                 android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>
 
+
+
             <Button
                 android:id="@+id/register"
                 android:layout_width="match_parent"

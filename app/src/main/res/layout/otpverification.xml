@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:ads="http://schemas.android.com/tools"
     android:orientation="vertical"
     tools:context="com.example.hardik.myapplication.OTPVerification">
 
@@ -54,4 +55,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/verify"
         android:visibility="gone"/>
+
 </LinearLayout>

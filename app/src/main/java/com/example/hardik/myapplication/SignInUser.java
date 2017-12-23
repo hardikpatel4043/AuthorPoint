@@ -52,8 +52,8 @@ public class SignInUser extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_sign_in_user);
+
         mAuth=FirebaseAuth.getInstance();
 
         email = (EditText) findViewById(R.id.email);
@@ -84,7 +84,6 @@ public class SignInUser extends AppCompatActivity  {
         });
 
 
-
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,6 +109,7 @@ public class SignInUser extends AppCompatActivity  {
                             //   FirebaseUser user=firebaseAuth.getCurrentUser();
                             progressBar.setVisibility(View.GONE);
                             startActivity(new Intent(SignInUser.this,Home_page.class));
+                            finish();
                         }else{
                             Toast.makeText(SignInUser.this,"Invalid Email or password",Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
@@ -124,6 +124,7 @@ public class SignInUser extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(SignInUser.this, Reset_password.class));
+                finish();
             }
         });
 
@@ -173,6 +174,7 @@ public class SignInUser extends AppCompatActivity  {
 
     private void signInWithFacebook(AccessToken token) {
 
+       // progressBar.setVisibility(View.VISIBLE);
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         Log.e("credital",credential.toString());
         mAuth.signInWithCredential(credential)
@@ -183,8 +185,6 @@ public class SignInUser extends AppCompatActivity  {
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
-                        boolean log=task.isSuccessful();
-                        Log.e("login",""+log);
                         if (!task.isSuccessful()) {
 
                             Log.e("login false","sign in credentail",task.getException());
@@ -193,14 +193,17 @@ public class SignInUser extends AppCompatActivity  {
                                     Toast.LENGTH_SHORT).show();
                         }else{
                            startActivity(new Intent(SignInUser.this,Home_page.class));
+                           finish();
                         }
                     }
                 });
+
     }
 
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
+
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
@@ -220,6 +223,7 @@ public class SignInUser extends AppCompatActivity  {
                                     Toast.LENGTH_SHORT).show();
                         }else{
                            startActivity(new Intent(SignInUser.this,Home_page.class));
+                           finish();
                         }
 
                     }
