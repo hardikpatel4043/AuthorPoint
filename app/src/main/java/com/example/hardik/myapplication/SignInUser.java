@@ -109,7 +109,7 @@ public class SignInUser extends AppCompatActivity  {
                             //   FirebaseUser user=firebaseAuth.getCurrentUser();
                             progressBar.setVisibility(View.GONE);
                             startActivity(new Intent(SignInUser.this,Home_page.class));
-                            finish();
+
                         }else{
                             Toast.makeText(SignInUser.this,"Invalid Email or password",Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
@@ -124,7 +124,7 @@ public class SignInUser extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(SignInUser.this, Reset_password.class));
-                finish();
+
             }
         });
 
@@ -193,17 +193,15 @@ public class SignInUser extends AppCompatActivity  {
                                     Toast.LENGTH_SHORT).show();
                         }else{
                            startActivity(new Intent(SignInUser.this,Home_page.class));
-                           finish();
                         }
                     }
                 });
 
     }
 
-    private void signIn() {
+    private void signIn(){
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
-
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
@@ -222,12 +220,18 @@ public class SignInUser extends AppCompatActivity  {
                             Toast.makeText(SignInUser.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }else{
-                           startActivity(new Intent(SignInUser.this,Home_page.class));
-                           finish();
+
+                            //startActivity(new Intent(SignInUser.this,Home_page.class));
+                            Intent i = new Intent(SignInUser.this, Home_page.class);
+                            // set the new task and clear flags
+                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                         //   i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(i);
                         }
 
                     }
                 });
     }
+
 
 }//end of class

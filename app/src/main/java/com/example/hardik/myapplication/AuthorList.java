@@ -33,7 +33,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
 /**
  * this class is main class for authorList in vertical view
  */
@@ -49,9 +48,6 @@ public class AuthorList extends android.support.v4.app.Fragment {
     public AuthorList() {
         // Required empty public constructor
     }
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,15 +55,13 @@ public class AuthorList extends android.support.v4.app.Fragment {
 
         View rootView=inflater.inflate(R.layout.author_list_vertical, container, false);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_author_list);
+
         mAdapter = new AuthorListAdapter(getActivity(),authorList);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(),1,GridLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(mLayoutManager);
 
         prepareAuthorData();
-
-
-        // row click listener
 
         return rootView;
     }
@@ -82,14 +76,14 @@ public class AuthorList extends android.support.v4.app.Fragment {
                     return;
                 }
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()) {
-                    HashMap<String,String> value= (HashMap<String, String>) snapshot.getValue();
-                    String name=value.get("name");
-                    String imageUrl=value.get("imageUrl");
-                    Log.e("name",""+name);
-                    Log.e("url",""+imageUrl);
-                   AuthorData authorData=new AuthorData(name,imageUrl);
+//                    HashMap<String,String> value= (HashMap<String, String>) snapshot.getValue();
+//                    String name=value.get("name");
+//                    String imageUrl=value.get("imageUrl");
+//                    Log.e("name",""+name);
+//                    Log.e("url",""+imageUrl);
+//                   AuthorData authorData=new AuthorData(name,imageUrl);
 
-                    //   AuthorData authorData = snapshot.getValue(AuthorData.class);
+                     AuthorData authorData = snapshot.getValue(AuthorData.class);
                     authorList.add(authorData);
                 }
                 recyclerView.setAdapter(mAdapter);
