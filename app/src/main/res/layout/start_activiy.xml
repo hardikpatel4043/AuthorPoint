@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="4"
+    tools:layout_editor_absoluteY="81dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        >
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/logo" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/make_visible_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3.5"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:visibility="gone"
+        >
+        <Button
+            android:id="@+id/author_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register As Author"
+            />
+        <Button
+            android:id="@+id/reader_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register As Reader" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/first_layout_make_invisible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3.5"
+        android:weightSum="2"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="sendMessage"
+            android:text="Login" />
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="gotoRegister"
+            android:text="Register" />
+
+    </LinearLayout>
+</LinearLayout>

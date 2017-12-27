@@ -1,28 +1,13 @@
 package com.example.hardik.myapplication;
 
 
-import android.app.Activity;
-import android.app.DownloadManager;
-import android.content.Context;
-import android.content.ContextWrapper;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.RequestManager;
-import com.example.hardik.myapplication.recycle_home.Author;
-import com.example.hardik.myapplication.recycle_home.AuthorData;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,7 +15,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -39,7 +23,7 @@ import java.util.List;
 public class AuthorList extends android.support.v4.app.Fragment {
 
 
-    private List<AuthorData> authorList = new ArrayList<>();
+    private List<AuthorRegister> authorList = new ArrayList<>();
     private RecyclerView recyclerView;
     private AuthorListAdapter mAdapter;
     private DatabaseReference mref;
@@ -72,9 +56,7 @@ public class AuthorList extends android.support.v4.app.Fragment {
         mref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(getActivity()==null){
-                    return;
-                }
+
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()) {
 //                    HashMap<String,String> value= (HashMap<String, String>) snapshot.getValue();
 //                    String name=value.get("name");
@@ -83,8 +65,8 @@ public class AuthorList extends android.support.v4.app.Fragment {
 //                    Log.e("url",""+imageUrl);
 //                   AuthorData authorData=new AuthorData(name,imageUrl);
 
-                     AuthorData authorData = snapshot.getValue(AuthorData.class);
-                    authorList.add(authorData);
+                     AuthorRegister authorData = snapshot.getValue(AuthorRegister.class);
+                     authorList.add(authorData);
                 }
                 recyclerView.setAdapter(mAdapter);
             }

@@ -39,7 +39,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class SignInUser extends AppCompatActivity  {
 
     private EditText email,password;
-    private Button submit,forgot,googleSignIn;
+    private Button submit,forgot;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
     private CallbackManager mCallbackManager;
@@ -47,7 +47,6 @@ public class SignInUser extends AppCompatActivity  {
     public static final int RC_SIGN_IN = 1;
     //google login button
     private SignInButton signInButton;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +107,9 @@ public class SignInUser extends AppCompatActivity  {
                         if(task.isSuccessful()){
                             //   FirebaseUser user=firebaseAuth.getCurrentUser();
                             progressBar.setVisibility(View.GONE);
-                            startActivity(new Intent(SignInUser.this,Home_page.class));
+                            Intent i=new Intent(SignInUser.this,MainActivity.class);
+                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(i);
 
                         }else{
                             Toast.makeText(SignInUser.this,"Invalid Email or password",Toast.LENGTH_LONG).show();
@@ -186,13 +187,12 @@ public class SignInUser extends AppCompatActivity  {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-
-                            Log.e("login false","sign in credentail",task.getException());
-                           // startActivity(new Intent(SignInUser.this,Home_page.class));
                             Toast.makeText(SignInUser.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }else{
-                           startActivity(new Intent(SignInUser.this,Home_page.class));
+                            Intent i=new Intent(SignInUser.this,MainActivity.class);
+                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(i);
                         }
                     }
                 });
@@ -222,7 +222,7 @@ public class SignInUser extends AppCompatActivity  {
                         }else{
 
                             //startActivity(new Intent(SignInUser.this,Home_page.class));
-                            Intent i = new Intent(SignInUser.this, Home_page.class);
+                            Intent i = new Intent(SignInUser.this, MainActivity.class);
                             // set the new task and clear flags
                             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                          //   i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

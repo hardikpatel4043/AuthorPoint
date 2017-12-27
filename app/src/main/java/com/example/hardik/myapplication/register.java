@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.hardik.myapplication.POJO.Follow;
+import com.example.hardik.myapplication.POJO.Reader;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -33,7 +35,7 @@ public class register extends AppCompatActivity implements View.OnClickListener 
         setContentView(R.layout.activity_register);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        ref=FirebaseDatabase.getInstance().getReference("Users");
+        ref=FirebaseDatabase.getInstance().getReference("reader");
         
         name=(EditText) findViewById(R.id.name);
         e=(EditText)findViewById(R.id.email);
@@ -41,7 +43,6 @@ public class register extends AppCompatActivity implements View.OnClickListener 
         password=(EditText)findViewById(R.id.pass);
         Button reg= (Button) findViewById(R.id.register);
         reg.setOnClickListener(this);
-
     }
 
     private void registerUser(){
@@ -59,9 +60,6 @@ public class register extends AppCompatActivity implements View.OnClickListener 
             Toast.makeText(this, "Please Enter Password", Toast.LENGTH_SHORT).show();
             return;
         }
-
-
-
 
        firebaseAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -82,11 +80,13 @@ public class register extends AppCompatActivity implements View.OnClickListener 
 
                     // String id=ref.push().getKey();
                     String id=user.getUid();
-                    UserData user=new UserData(uname,email,phoneNo,pass);
+                    Follow follow=new Follow("none");
+                    Reader user=new Reader(email,uname,phoneNo,"none",follow);
                     ref.child(id).setValue(user);
 
                     Toast.makeText(register.this,"Succesfully Registerd",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(),SignInUser.class));
+                    finish();
                 }else{
                     Toast.makeText(register.this,"Registeration Error",Toast.LENGTH_SHORT).show();
                 }

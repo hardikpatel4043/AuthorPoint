@@ -1,7 +1,6 @@
 package com.example.hardik.myapplication;
 
 import android.content.Context;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,9 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
-import com.example.hardik.myapplication.recycle_home.AuthorData;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 /**
@@ -21,9 +18,8 @@ import java.util.List;
 
 public class AuthorListAdapter extends RecyclerView.Adapter<AuthorListAdapter.MyViewHolder> {
 
-    private List<AuthorData> authorList;
+    private List<AuthorRegister> authorList;
     private Context context;
-
 
     @Override
     public AuthorListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -36,11 +32,13 @@ public class AuthorListAdapter extends RecyclerView.Adapter<AuthorListAdapter.My
     @Override
     public void onBindViewHolder(AuthorListAdapter.MyViewHolder holder, int position) {
 
-        Log.e("imageUrl",""+authorList.get(position).getImageUrl());
-        holder.name.setText(authorList.get(position).getName());
-    //    holder.image.setImageResource(authorList.get(position).getImageUrl());
-      Glide.with(context).load(authorList.get(position).getImageUrl()).into(holder.image);
 
+        holder.name.setText(authorList.get(position).getName());
+        if(authorList.get(position).getImage().equals("default")){
+            Glide.with(context).load(R.drawable.default_avatar).apply(RequestOptions.circleCropTransform()).into(holder.image);
+        }else{
+            Glide.with(context).load(authorList.get(position).getImage()).apply(RequestOptions.circleCropTransform()).into(holder.image);
+        }
 
     }
 
@@ -50,7 +48,7 @@ public class AuthorListAdapter extends RecyclerView.Adapter<AuthorListAdapter.My
         return authorList.size();
     }
 
-    public AuthorListAdapter(Context context, List<AuthorData> bookList )
+    public AuthorListAdapter(Context context, List<AuthorRegister> bookList )
     {
         this.context=context;
         this.authorList=bookList;
