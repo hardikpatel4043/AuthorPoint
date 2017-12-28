@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,11 +17,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class register extends AppCompatActivity implements View.OnClickListener {
+public class ReaderRegister extends AppCompatActivity implements View.OnClickListener {
 
     private DatabaseReference ref;
     private FirebaseUser user;
@@ -32,7 +30,7 @@ public class register extends AppCompatActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.reader_register);
 
         firebaseAuth = FirebaseAuth.getInstance();
         ref=FirebaseDatabase.getInstance().getReference("reader");
@@ -71,9 +69,9 @@ public class register extends AppCompatActivity implements View.OnClickListener 
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                            if(task.isSuccessful()){
-                               Toast.makeText(register.this,"Email send for verification",Toast.LENGTH_SHORT);
+                               Toast.makeText(ReaderRegister.this,"Email send for verification",Toast.LENGTH_SHORT);
                            }else{
-                               Toast.makeText(register.this,"Email send for verification Error",Toast.LENGTH_SHORT);
+                               Toast.makeText(ReaderRegister.this,"Email send for verification Error",Toast.LENGTH_SHORT);
                            }
                         }
                     });
@@ -84,11 +82,11 @@ public class register extends AppCompatActivity implements View.OnClickListener 
                     Reader user=new Reader(email,uname,phoneNo,"none",follow);
                     ref.child(id).setValue(user);
 
-                    Toast.makeText(register.this,"Succesfully Registerd",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ReaderRegister.this,"Succesfully Registerd",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(),SignInUser.class));
                     finish();
                 }else{
-                    Toast.makeText(register.this,"Registeration Error",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ReaderRegister.this,"Registeration Error",Toast.LENGTH_SHORT).show();
                 }
             }
         });

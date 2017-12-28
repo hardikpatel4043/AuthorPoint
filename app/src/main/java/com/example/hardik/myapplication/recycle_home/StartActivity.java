@@ -9,8 +9,8 @@ import android.widget.LinearLayout;
 
 import com.example.hardik.myapplication.AuthorRegisteration;
 import com.example.hardik.myapplication.R;
-import com.example.hardik.myapplication.login_page;
-import com.example.hardik.myapplication.register;
+import com.example.hardik.myapplication.SelectUserLogin;
+import com.example.hardik.myapplication.ReaderRegister;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -33,11 +33,11 @@ public class StartActivity extends AppCompatActivity {
     }
 
     public void sendMessage(View view){
-        Intent intent =new Intent(this,login_page.class);
+        Intent intent =new Intent(this,SelectUserLogin.class);
         startActivity(intent);
     }
 
-    //Click on register button
+    //Click on ReaderRegister button
     public void gotoRegister(View view){
 
         layoutInvisibel.setVisibility(View.GONE);
@@ -46,7 +46,7 @@ public class StartActivity extends AppCompatActivity {
         reader_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(StartActivity.this,register.class);
+                Intent intent=new Intent(StartActivity.this,ReaderRegister.class);
                 startActivity(intent);
             }
         });

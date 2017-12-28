@@ -10,8 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.hardik.myapplication.POJO.Follow;
-import com.example.hardik.myapplication.POJO.Reader;
+import com.example.hardik.myapplication.POJO.AuthorRegister;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

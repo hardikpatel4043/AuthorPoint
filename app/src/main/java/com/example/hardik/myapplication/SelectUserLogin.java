@@ -6,19 +6,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class login_page extends AppCompatActivity {
+public class SelectUserLogin extends AppCompatActivity {
 
     Button b;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_page);
+        setContentView(R.layout.select_user_login);
 
         b=(Button)findViewById(R.id.button2);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(login_page.this,SignInUser.class));
+                startActivity(new Intent(SelectUserLogin.this,SignInUser.class));
 
             }
         });

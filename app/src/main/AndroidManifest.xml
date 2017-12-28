@@ -18,8 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login_page" />
-        <activity android:name=".register" />
+        <activity android:name=".SelectUserLogin" />
+        <activity android:name=".ReaderRegister" />
         <activity android:name=".SignInUser" />
 
         <meta-data
@@ -47,7 +47,9 @@
         <activity android:name=".OTPVerification" />
         <activity android:name=".recycle_home.StartActivity" />
         <activity android:name=".EnterDataTemp" />
-        <activity android:name=".AuthorRegisteration"></activity>
+        <activity android:name=".AuthorRegisteration" />
+        <activity android:name=".AuthorInDetail"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

@@ -1,13 +1,17 @@
 package com.example.hardik.myapplication;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.hardik.myapplication.ItemClick.RecyclerItemClickListener;
+import com.example.hardik.myapplication.POJO.AuthorRegister;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,9 +28,11 @@ public class AuthorList extends android.support.v4.app.Fragment {
 
 
     private List<AuthorRegister> authorList = new ArrayList<>();
+    private List<String> authorId=new ArrayList<>();
     private RecyclerView recyclerView;
     private AuthorListAdapter mAdapter;
     private DatabaseReference mref;
+
 
 
     public AuthorList() {
@@ -57,13 +63,19 @@ public class AuthorList extends android.support.v4.app.Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
+                authorList.clear();
+                authorId.clear();
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()) {
-//                    HashMap<String,String> value= (HashMap<String, String>) snapshot.getValue();
-//                    String name=value.get("name");
+
+                    String key=snapshot.getRef().getKey().toString();
+                    authorId.add(key);
+
+                    Log.e("key",""+key);
 //                    String imageUrl=value.get("imageUrl");
 //                    Log.e("name",""+name);
 //                    Log.e("url",""+imageUrl);
 //                   AuthorData authorData=new AuthorData(name,imageUrl);
+
 
                      AuthorRegister authorData = snapshot.getValue(AuthorRegister.class);
                      authorList.add(authorData);
@@ -77,5 +89,14 @@ public class AuthorList extends android.support.v4.app.Fragment {
             }
         });
         mAdapter.notifyDataSetChanged();
+
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent inDetail=new Intent(getActivity(),AuthorInDetail.class);
+                inDetail.putExtra("AuthorId",authorId.get(position));
+                startActivity(inDetail);
+            }
+        }));
     }
 }

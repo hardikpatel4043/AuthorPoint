@@ -43,10 +43,10 @@ public class SignInUser extends AppCompatActivity  {
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
     private CallbackManager mCallbackManager;
-    GoogleApiClient mGoogleApiClient;
     public static final int RC_SIGN_IN = 1;
     //google login button
     private SignInButton signInButton;
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,12 +83,12 @@ public class SignInUser extends AppCompatActivity  {
         });
 
 
+        //login with email and password
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String e=email.getText().toString();
                 String p=password.getText().toString();
-
 
                 if(TextUtils.isEmpty(e)){
                     Toast.makeText(SignInUser.this,"Please Enter Email ID",Toast.LENGTH_LONG).show();
@@ -121,6 +121,7 @@ public class SignInUser extends AppCompatActivity  {
             }
         });
 
+        //forgot password option
         forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,7 +136,6 @@ public class SignInUser extends AppCompatActivity  {
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-
          mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
                     @Override
@@ -152,6 +152,7 @@ public class SignInUser extends AppCompatActivity  {
                 signIn();
             }
         });
+
     }//end of onCreate() method
 
     @Override
@@ -173,8 +174,8 @@ public class SignInUser extends AppCompatActivity  {
         }
     }
 
+    //login with facebook
     private void signInWithFacebook(AccessToken token) {
-
        // progressBar.setVisibility(View.VISIBLE);
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         Log.e("credital",credential.toString());
@@ -183,9 +184,6 @@ public class SignInUser extends AppCompatActivity  {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Toast.makeText(SignInUser.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
@@ -204,17 +202,13 @@ public class SignInUser extends AppCompatActivity  {
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
 
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
 
                             Toast.makeText(SignInUser.this, "Authentication failed.",
@@ -228,7 +222,6 @@ public class SignInUser extends AppCompatActivity  {
                          //   i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(i);
                         }
-
                     }
                 });
     }
