@@ -13,7 +13,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Reset_password extends AppCompatActivity {
+public class ResetPassword extends AppCompatActivity {
 
     FirebaseAuth auth;
     EditText email;
@@ -38,10 +38,10 @@ public class Reset_password extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(Reset_password.this,"we have sent you mail",Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(Reset_password.this,SelectUserLogin.class));
+                            Toast.makeText(ResetPassword.this,"we have sent you mail",Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(ResetPassword.this,SelectUserLogin.class));
                         }else{
-                            Toast.makeText(Reset_password.this,"Error ",Toast.LENGTH_LONG).show();
+                            Toast.makeText(ResetPassword.this,"Error ",Toast.LENGTH_LONG).show();
                         }
                     }
                 });

@@ -48,9 +48,7 @@
             android:id="@+id/recycler_author"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_below="@+id/recycler_book"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"/>
+            android:layout_marginTop="5dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,7 +62,6 @@
             android:id="@+id/recycler_event"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_below="@+id/recycler_author"
             android:layout_marginTop="5dp"
             />
 

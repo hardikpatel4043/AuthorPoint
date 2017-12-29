@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 /**
  *
  */
-public class Change_passord extends Fragment {
+public class ChangePassword extends Fragment {
 
     EditText password,currentPassword;
     Button submit;
@@ -31,8 +31,7 @@ public class Change_passord extends Fragment {
     AuthCredential  credential;
     String pass;
 
-
-    public Change_passord() {
+    public ChangePassword() {
         // Required empty public constructor
     }
 

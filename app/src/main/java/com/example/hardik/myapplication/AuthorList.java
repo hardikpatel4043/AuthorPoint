@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 
 import com.example.hardik.myapplication.ItemClick.RecyclerItemClickListener;
 import com.example.hardik.myapplication.POJO.AuthorRegister;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +35,8 @@ public class AuthorList extends android.support.v4.app.Fragment {
     private AuthorListAdapter mAdapter;
     private DatabaseReference mref;
 
+    private FirebaseUser mCurrentUser;
+
 
 
     public AuthorList() {
@@ -51,6 +55,7 @@ public class AuthorList extends android.support.v4.app.Fragment {
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(),1,GridLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(mLayoutManager);
 
+        mCurrentUser= FirebaseAuth.getInstance().getCurrentUser();
         prepareAuthorData();
 
         return rootView;
@@ -58,6 +63,8 @@ public class AuthorList extends android.support.v4.app.Fragment {
 
     void prepareAuthorData(){
         mref=FirebaseDatabase.getInstance().getReference("author");
+        mref.keepSynced(true);
+        final String current_user_id=mCurrentUser.getUid().toString();
 
         mref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -66,20 +73,17 @@ public class AuthorList extends android.support.v4.app.Fragment {
                 authorList.clear();
                 authorId.clear();
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()) {
-
                     String key=snapshot.getRef().getKey().toString();
+
+//                    if(current_user_id.equals(key)){
+//                        continue;
+//                    }
+
                     authorId.add(key);
 
-                    Log.e("key",""+key);
-//                    String imageUrl=value.get("imageUrl");
-//                    Log.e("name",""+name);
-//                    Log.e("url",""+imageUrl);
-//                   AuthorData authorData=new AuthorData(name,imageUrl);
-
-
-                     AuthorRegister authorData = snapshot.getValue(AuthorRegister.class);
-                     authorList.add(authorData);
-                }
+                    AuthorRegister authorData = snapshot.getValue(AuthorRegister.class);
+                    authorList.add(authorData);
+                }//End of for Loop
                 recyclerView.setAdapter(mAdapter);
             }
 
@@ -93,7 +97,7 @@ public class AuthorList extends android.support.v4.app.Fragment {
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent inDetail=new Intent(getActivity(),AuthorInDetail.class);
+                Intent inDetail=new Intent(getActivity(),AuthorDisplayProfile.class);
                 inDetail.putExtra("AuthorId",authorId.get(position));
                 startActivity(inDetail);
             }

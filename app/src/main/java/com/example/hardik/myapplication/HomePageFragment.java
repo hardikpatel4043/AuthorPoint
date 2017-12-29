@@ -23,9 +23,9 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class f_home_page extends android.support.v4.app.Fragment {
+public class HomePageFragment extends android.support.v4.app.Fragment {
 
-    public f_home_page() {
+    public HomePageFragment() {
         // Required empty public constructor
 
     }
@@ -50,7 +50,7 @@ public class f_home_page extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View rootView=inflater.inflate(R.layout.fragment_f_home_page, container, false);
+        View rootView=inflater.inflate(R.layout.home_page_fragment, container, false);
 
 
 

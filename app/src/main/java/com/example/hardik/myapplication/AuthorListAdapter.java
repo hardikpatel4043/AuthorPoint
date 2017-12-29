@@ -23,6 +23,7 @@ public class AuthorListAdapter extends RecyclerView.Adapter<AuthorListAdapter.My
 
     @Override
     public AuthorListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_author_list_vertical_view, parent, false);
 
@@ -31,7 +32,6 @@ public class AuthorListAdapter extends RecyclerView.Adapter<AuthorListAdapter.My
 
     @Override
     public void onBindViewHolder(AuthorListAdapter.MyViewHolder holder, int position) {
-
 
         holder.name.setText(authorList.get(position).getName());
         if(authorList.get(position).getImage().equals("default")){
@@ -55,7 +55,6 @@ public class AuthorListAdapter extends RecyclerView.Adapter<AuthorListAdapter.My
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-
         public TextView name;
         public ImageView image;
         public MyViewHolder(View itemView) {

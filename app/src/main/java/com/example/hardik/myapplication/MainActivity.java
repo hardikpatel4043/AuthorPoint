@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity
 
         //set homepage on loading
         FragmentTransaction tx=getSupportFragmentManager().beginTransaction();
-        tx.replace(R.id.frame,new f_home_page()).commit();
+        tx.replace(R.id.frame,new HomePageFragment()).commit();
     }
 
     @Override
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity
 
             return true;
         }else if(id==R.id.change_password){
-            Change_passord fragment=new Change_passord();
+            ChangePassword fragment=new ChangePassword();
             FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame,fragment);
             fragmentTransaction.commit();
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_home_page) {
             // Handle the camera action
             setTitle("Homepage");
-            f_home_page fragment=new f_home_page();
+            HomePageFragment fragment=new HomePageFragment();
             FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame,fragment);
             fragmentTransaction.commit();

@@ -16,7 +16,6 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -125,7 +124,7 @@ public class SignInUser extends AppCompatActivity  {
         forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SignInUser.this, Reset_password.class));
+                startActivity(new Intent(SignInUser.this, ResetPassword.class));
 
             }
         });

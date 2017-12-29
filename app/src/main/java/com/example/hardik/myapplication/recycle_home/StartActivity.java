@@ -22,7 +22,7 @@ public class StartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.start_activiy);
+        setContentView(R.layout.start_activity);
 
 
         author_button=findViewById(R.id.author_register);

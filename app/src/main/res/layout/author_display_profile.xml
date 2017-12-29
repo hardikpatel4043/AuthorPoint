@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.hardik.myapplication.AuthorInDetail">
+    tools:context="com.example.hardik.myapplication.AuthorDisplayProfile">
 
     <ImageView
         android:id="@+id/author_in_detail_profile_image"
@@ -57,4 +57,19 @@
         app:layout_constraintHorizontal_bias="0.087"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/author_in_detail_profile_image" />
+
+    <Button
+        android:id="@+id/author_display_friend_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Send Friend Request"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/author_in_detail_phone"
+        app:layout_constraintVertical_bias="0.736" />
 </android.support.constraint.ConstraintLayout>
