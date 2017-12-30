@@ -75,9 +75,9 @@ public class AuthorList extends android.support.v4.app.Fragment {
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()) {
                     String key=snapshot.getRef().getKey().toString();
 
-//                    if(current_user_id.equals(key)){
-//                        continue;
-//                    }
+                    if(current_user_id.equals(key)){
+                        continue;
+                    }
 
                     authorId.add(key);
 

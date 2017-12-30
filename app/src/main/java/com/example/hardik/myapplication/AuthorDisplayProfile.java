@@ -195,7 +195,6 @@ public class AuthorDisplayProfile extends AppCompatActivity {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
                                                         if(task.isSuccessful()){
-
                                                             mFriendRequestDatabase.child(mCurrentUser.getUid()).child(viewUserId).removeValue()
                                                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                         @Override

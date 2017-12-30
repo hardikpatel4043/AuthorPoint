@@ -4,11 +4,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.example.hardik.myapplication.FriendRequestAdapter;
+
 import com.example.hardik.myapplication.POJO.AuthorRegister;
 import com.example.hardik.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,9 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class FriendRequestTab extends Fragment {
 
@@ -51,7 +48,7 @@ public class FriendRequestTab extends Fragment {
 
         recyclerView = rootView.findViewById(R.id.recycler_friend_req);
 
-        mAdapter = new FriendRequestAdapter(getActivity(),mAuthorFriendList);
+        mAdapter = new FriendRequestAdapter(getActivity(),mAuthorFriendList,friendReqList);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(),1,GridLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -66,50 +63,51 @@ public class FriendRequestTab extends Fragment {
         mFriendReqDatabase.child(currentUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+                friendReqList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                    String req=snapshot.getKey();
-                    String f=dataSnapshot.child(req).child("request_type").getValue().toString();
+                    String req = snapshot.getKey();
+                    String f = dataSnapshot.child(req).child("request_type").getValue().toString();
 
-                    if(f.equals("received")){
+                    if (f.equals("received")) {
                         friendReqList.add(req);
                     }
-                }
-            }
+                }//End of for loop
+
+
+
+                mAuthorDetail.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        mAuthorFriendList.clear();
+                        for(int i=0;i<friendReqList.size();i++){
+                            String getId=friendReqList.get(i);
+
+                            for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+                                String id=snapshot.getKey().toString();
+
+                                if(id.equals(getId)){
+                                    AuthorRegister authorData = snapshot.getValue(AuthorRegister.class);
+                                    mAuthorFriendList.add(authorData);
+                                }
+                            }
+                        }
+                        recyclerView.setAdapter(mAdapter);
+                    }//End of onDataChange method
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });//End of mAuthorDetail
+
+            }//End of onDataChange
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });//End of mFriendReqDatabase
-
-        mAuthorDetail.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                for(int i=0;i<friendReqList.size();i++){
-                    String getId=friendReqList.get(i);
-
-                    for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                        String id=snapshot.getKey().toString();
-
-                        if(id.equals(getId)){
-                            AuthorRegister authorData = snapshot.getValue(AuthorRegister.class);
-                            mAuthorFriendList.add(authorData);
-                        }
-                    }
-                }
-                recyclerView.setAdapter(mAdapter);
-            }//End of onDataChange method
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });//End of mAuthorDetail
-
-
-
-
 
 
         return rootView;

@@ -8,7 +8,7 @@
 
     <!--android:background="#ccc"-->
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_friend_req"
+        android:id="@+id/recycler_friends_tab"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical">
