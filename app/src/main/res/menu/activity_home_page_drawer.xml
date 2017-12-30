@@ -20,6 +20,7 @@
             android:title="change password"
             android:icon="@drawable/ic_menu_send"/>
         <item
+            android:id="@+id/inbox"
             android:icon="@drawable/messenger_bubble_large_blue"
             android:title="Inbox"/>
         <item

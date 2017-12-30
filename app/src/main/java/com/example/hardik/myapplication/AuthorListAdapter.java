@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.hardik.myapplication.POJO.AuthorRegister;
@@ -54,7 +56,7 @@ public class AuthorListAdapter extends RecyclerView.Adapter<AuthorListAdapter.My
         this.authorList=bookList;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name;
         public ImageView image;
         public MyViewHolder(View itemView) {

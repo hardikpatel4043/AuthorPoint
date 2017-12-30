@@ -21,15 +21,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AuthorDisplayProfile extends AppCompatActivity {
 
     TextView name,email,phone;
     ImageView image;
-    Button mFriendRequestButton;
+    Button mFriendRequestButton,mDeclineRequetButton;
     //Firebase
     DatabaseReference mRef;
 
@@ -50,6 +49,7 @@ public class AuthorDisplayProfile extends AppCompatActivity {
         phone=findViewById(R.id.author_in_detail_phone);
         image=findViewById(R.id.author_in_detail_profile_image);
         mFriendRequestButton=findViewById(R.id.author_display_friend_button);
+        mDeclineRequetButton=findViewById(R.id.author_display_decline_btn);
 
         //firebase database
         mRef= FirebaseDatabase.getInstance().getReference("author");
@@ -85,6 +85,8 @@ public class AuthorDisplayProfile extends AppCompatActivity {
 
                                 mCurrent_state="req_received";
                                 mFriendRequestButton.setText("Accept Friend Request");
+                                mDeclineRequetButton.setVisibility(View.VISIBLE);
+
                             }else if(req_type.equals("sent")){
                                 mCurrent_state="req_sent";
                                 mFriendRequestButton.setText("Cancel Friend Request");
@@ -122,10 +124,10 @@ public class AuthorDisplayProfile extends AppCompatActivity {
             }
         });
 
-        //-------------------
+        //-------------------Button Click Listener-----------
         mFriendRequestButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
 
                 mFriendRequestButton.setEnabled(false);
 
@@ -182,7 +184,7 @@ public class AuthorDisplayProfile extends AppCompatActivity {
                 //------------------REQUEST  RECEIVED STATE---------
                 if(mCurrent_state.equals("req_received")){
 
-                    final String currentDate= DateFormat.getDateInstance().format(new Date());
+                    final String currentDate=new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
                     mFriendDatabase.child(mCurrentUser.getUid()).child(viewUserId).setValue(currentDate)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -207,6 +209,7 @@ public class AuthorDisplayProfile extends AppCompatActivity {
 
                                                                                                 mCurrent_state="friends";
                                                                                                 mFriendRequestButton.setText("UnFriend");
+                                                                                                mDeclineRequetButton.setVisibility(View.INVISIBLE);
 
                                                                                             }
                                                                                             mFriendRequestButton.setEnabled(true);
@@ -214,7 +217,6 @@ public class AuthorDisplayProfile extends AppCompatActivity {
                                                                                     });
                                                                         }
                                                                     });
-
                                                         }
                                                     }
                                                 });
@@ -250,13 +252,34 @@ public class AuthorDisplayProfile extends AppCompatActivity {
                     });
 
                 }
-
-
-
             }//End of onClick() method
-        });
+        });//End of mFriendRequestButton method
 
+        //--------------------Decline Friend Request--------------
+        mDeclineRequetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFriendRequestDatabase.child(mCurrentUser.getUid()).child(viewUserId).removeValue()
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
 
+                                mFriendRequestDatabase.child(viewUserId).child(mCurrentUser.getUid()).removeValue()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+
+                                                mFriendRequestButton.setEnabled(true);
+                                                mCurrent_state="not_friends";
+                                                mFriendRequestButton.setText("send Friend Request");
+
+                                                mDeclineRequetButton.setVisibility(View.INVISIBLE);
+                                            }
+                                        });
+                            }
+                        });
+            }
+        });//End of mDeclineRequest method
 
     }//End of onCreate() method
 }//End of AuthorDisplayProfile

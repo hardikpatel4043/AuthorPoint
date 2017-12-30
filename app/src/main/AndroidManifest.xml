@@ -5,13 +5,13 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".POJO.OfflineAuthorPoint"
         android:allowBackup="true"
         android:icon="@drawable/logo_main"
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo_main"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".POJO.OfflineAuthorPoint">
+        android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,8 +49,9 @@
         <activity android:name=".recycle_home.StartActivity" />
         <activity android:name=".EnterDataTemp" />
         <activity android:name=".AuthorRegisteration" />
-        <activity android:name=".AuthorDisplayProfile"
-            android:parentActivityName=".MainActivity" ></activity>
+        <activity
+            android:name=".AuthorDisplayProfile" />
+        <activity android:name=".ViewPager.InboxActivity"></activity>
     </application>
 
 </manifest>

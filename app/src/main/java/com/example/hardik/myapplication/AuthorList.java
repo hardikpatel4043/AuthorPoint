@@ -48,7 +48,7 @@ public class AuthorList extends android.support.v4.app.Fragment {
         // Inflate the layout for this fragment
 
         View rootView=inflater.inflate(R.layout.author_list_vertical, container, false);
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view_author_list);
+        recyclerView = rootView.findViewById(R.id.recycler_view_author_list);
 
         mAdapter = new AuthorListAdapter(getActivity(),authorList);
         recyclerView.setHasFixedSize(true);

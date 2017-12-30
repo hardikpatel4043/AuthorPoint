@@ -12,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.example.hardik.myapplication.ViewPager.InboxActivity;
 import com.example.hardik.myapplication.recycle_home.StartActivity;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
@@ -123,6 +125,10 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame,fragment);
             fragmentTransaction.commit();
+
+        }else if(id==R.id.inbox){
+
+            startActivity(new Intent(MainActivity.this, InboxActivity.class));
 
         } else if (id == R.id.nav_logout) {
 
