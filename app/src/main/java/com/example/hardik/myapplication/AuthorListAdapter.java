@@ -36,6 +36,12 @@ public class AuthorListAdapter extends RecyclerView.Adapter<AuthorListAdapter.My
     public void onBindViewHolder(AuthorListAdapter.MyViewHolder holder, int position) {
 
         holder.name.setText(authorList.get(position).getName());
+
+        boolean  online_status=  authorList.get(position).isOnline();
+        if(online_status){
+            holder.onlineDot.setVisibility(View.VISIBLE);
+        }
+
         if(authorList.get(position).getImage().equals("default")){
             Glide.with(context).load(R.drawable.default_avatar).apply(RequestOptions.circleCropTransform()).into(holder.image);
         }else{
@@ -43,7 +49,6 @@ public class AuthorListAdapter extends RecyclerView.Adapter<AuthorListAdapter.My
         }
 
     }
-
 
     @Override
     public int getItemCount() {
@@ -58,11 +63,12 @@ public class AuthorListAdapter extends RecyclerView.Adapter<AuthorListAdapter.My
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name;
-        public ImageView image;
+        public ImageView image,onlineDot;
         public MyViewHolder(View itemView) {
             super(itemView);
             name=(TextView) itemView.findViewById(R.id.fragment_author__list_name);
             image=(ImageView) itemView.findViewById(R.id.fragment_author__list_image);
+            onlineDot=itemView.findViewById(R.id.online_dot_image);
         }
     }//end of Myviewholder
 }

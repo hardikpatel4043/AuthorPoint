@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -18,12 +19,45 @@ import com.example.hardik.myapplication.recycle_home.StartActivity;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     FirebaseUser user;
     FirebaseAuth firebaseAuth;
+    DatabaseReference mUserRef;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        firebaseAuth=FirebaseAuth.getInstance();
+        user=FirebaseAuth.getInstance().getCurrentUser();
+        if(firebaseAuth.getCurrentUser()==null){
+            startActivity(new Intent(getApplicationContext(),StartActivity.class));
+            finish();
+        }else {
+
+            mUserRef.child("online").setValue(true);
+        }
+
+    }//End of onStart() method
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        firebaseAuth=FirebaseAuth.getInstance();
+        if(firebaseAuth.getCurrentUser()!=null){
+            mUserRef.child("online").setValue(false);
+        }
+
+
+    }//End of onStop() method
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +67,8 @@ public class MainActivity extends AppCompatActivity
         firebaseAuth=FirebaseAuth.getInstance();
         user=FirebaseAuth.getInstance().getCurrentUser();
 
-        if(firebaseAuth.getCurrentUser()==null){
-            startActivity(new Intent(getApplicationContext(),StartActivity.class));
-            finish();
+        if(firebaseAuth.getCurrentUser()!=null){
+            mUserRef=FirebaseDatabase.getInstance().getReference("author").child(user.getUid());
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -69,7 +102,6 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
-
         }
     }
 
@@ -116,8 +148,12 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.commit();
         } else if (id == R.id.nav_booklist) {
 
-            startActivity(new Intent(MainActivity.this,EnterDataTemp.class));
-            //startActivity(new Intent(Home_page.this,Book_detail.class));
+            setTitle("Books");
+            BookList fragment=new BookList();
+            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame,fragment);
+            fragmentTransaction.commit();
+
         } else if (id == R.id.nav_author_list) {
 
             setTitle("Authors");
@@ -135,6 +171,9 @@ public class MainActivity extends AppCompatActivity
             LoginManager.getInstance().logOut();
             FirebaseAuth.getInstance().signOut();
             //To stop user from login without password after logout
+
+
+            mUserRef.child("online").setValue(false);
 
             startActivity(new Intent(getApplicationContext(),StartActivity.class));
             finish();

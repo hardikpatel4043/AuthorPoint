@@ -85,7 +85,7 @@ public class AuthorRegisteration extends AppCompatActivity {
 
                     // String id=ref.push().getKey();
                     String id=user.getUid();
-                    AuthorRegister dataEnter=new AuthorRegister(phone,"default","defalut",emailInput,uname,"default","default");
+                    AuthorRegister dataEnter=new AuthorRegister(phone,"default","defalut",emailInput,uname,"default","default",false);
                     mDatabase.child(id).setValue(dataEnter);
 
                     Toast.makeText(AuthorRegisteration.this,"Succesfully Registerd",Toast.LENGTH_SHORT).show();

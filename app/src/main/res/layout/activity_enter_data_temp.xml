@@ -26,6 +26,9 @@
         android:id="@+id/tem_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_alignStart="@+id/textInputLayout1"
+        android:layout_below="@+id/textInputLayout1"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="56dp"
         android:text="Button" />
 </RelativeLayout>

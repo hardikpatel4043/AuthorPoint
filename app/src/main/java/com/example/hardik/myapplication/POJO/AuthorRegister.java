@@ -12,17 +12,29 @@ package com.example.hardik.myapplication.POJO;
 
         }
 
-       public AuthorRegister(String phone, String follower, String buyBook, String email, String name, String image, String ownBook) {
+    public boolean isOnline() {
+        return online;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
+    }
+
+    public AuthorRegister(String phone, String follower, String buyBook, String email, String name, String image, String ownBook, boolean online) {
         this.phone = phone;
         this.follower = follower;
         this.buyBook = buyBook;
+
         this.email = email;
         this.name = name;
         this.image = image;
         this.ownBook = ownBook;
+        this.online=online;
         }
 
-    private String buyBook;
+        private boolean online;
+
+        private String buyBook;
 
         private String email;
 

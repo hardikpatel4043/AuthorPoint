@@ -32,7 +32,11 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 
 public class SignInUser extends AppCompatActivity  {
@@ -82,7 +86,7 @@ public class SignInUser extends AppCompatActivity  {
         });
 
 
-        //login with email and password
+        //------------------------login with email and password-----------------------------
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,7 +108,13 @@ public class SignInUser extends AppCompatActivity  {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if(task.isSuccessful()){
-                            //   FirebaseUser user=firebaseAuth.getCurrentUser();
+                            FirebaseUser user=mAuth.getCurrentUser();
+                            DatabaseReference mUser= FirebaseDatabase.getInstance().getReference("author");
+                            String current_user_id=user.getUid();
+                            String token_id= FirebaseInstanceId.getInstance().getToken();
+
+                            mUser.child(current_user_id).child("device_token").setValue(token_id);
+
                             progressBar.setVisibility(View.GONE);
                             Intent i=new Intent(SignInUser.this,MainActivity.class);
                             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -120,7 +130,7 @@ public class SignInUser extends AppCompatActivity  {
             }
         });
 
-        //forgot password option
+        //--------------------forgot password option---------------------
         forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -128,7 +138,6 @@ public class SignInUser extends AppCompatActivity  {
 
             }
         });
-
 
         //Google signIN method
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -173,7 +182,7 @@ public class SignInUser extends AppCompatActivity  {
         }
     }
 
-    //login with facebook
+    //-------------------------login with facebook-------------------
     private void signInWithFacebook(AccessToken token) {
        // progressBar.setVisibility(View.VISIBLE);
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());

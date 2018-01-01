@@ -5,17 +5,24 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.hardik.myapplication.POJO.Book;
 import com.example.hardik.myapplication.POJO.Reader;
+import com.example.hardik.myapplication.POJO.Review;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class EnterDataTemp extends AppCompatActivity {
 
-    TextInputLayout layout1,layout2;
+    TextInputLayout layout1;
     Button submit;
     DatabaseReference database;
     FirebaseUser user;
@@ -25,7 +32,7 @@ public class EnterDataTemp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_data_temp);
 
-        database=FirebaseDatabase.getInstance().getReference("reader");
+        database=FirebaseDatabase.getInstance().getReference("book");
         user= FirebaseAuth.getInstance().getCurrentUser();
 
         layout1=findViewById(R.id.textInputLayout1);
@@ -38,32 +45,14 @@ public class EnterDataTemp extends AppCompatActivity {
 
                 String pushId=database.push().getKey();
                 String parameter =layout1.getEditText().getText().toString();
-                Map<String,Object> updataData=new HashMap<>();
-                //I need to get follower id from user and enter here
-                updataData.put("followerId","true");
-                database.child(id).child("follow").child(pushId).setValue(updataData);
+
+                Review fakeReview=new Review("nice book");
+
+                String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+                Book enterData=new Book(timeStamp,100,"you can win","book001","english","motivational",fakeReview,"jakdfjdlf","default");
+                database.child(pushId).setValue(enterData);
 
 
-                //Retrieve buy book
-             /*   database.child(id).child("buyBook").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        String email=dataSnapshot.child(email).getValue().toString();
-
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            HashMap<String, HashMap<String, String>> value = (HashMap<String, HashMap<String, String>>) dataSnapshot.getValue();
-                            Map<String, String> temp = value.get(snapshot.getKey());
-                            String name = temp.get("buyBook");
-                            Log.e("name", "" + name);
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-*/
             }
         });
 

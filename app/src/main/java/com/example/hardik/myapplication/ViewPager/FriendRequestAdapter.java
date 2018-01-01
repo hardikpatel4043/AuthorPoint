@@ -98,7 +98,7 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
                 @Override
                 public void onClick(View view) {
 
-                    final String currentDate=new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+                    final String currentDate=new SimpleDateFormat("yyyy/MM/dd-HH.mm.ss").format(new Date());
                     mFriendDatabase.child(mCurrentUser.getUid()).child(viewUserId).setValue(currentDate)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

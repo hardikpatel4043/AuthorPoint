@@ -26,12 +26,14 @@ public class FriendRequestTab extends Fragment {
     private DatabaseReference mFriendReqDatabase;
     private DatabaseReference mAuthorDetail;
     private FirebaseUser currentUser;
+    private DatabaseReference mReaderDatabase;
 
     public List<String> friendReqList;
     private List<AuthorRegister> mAuthorFriendList;
 
     private RecyclerView recyclerView;
     private FriendRequestAdapter mAdapter;
+
 
 
     public FriendRequestTab() {
@@ -55,6 +57,7 @@ public class FriendRequestTab extends Fragment {
 
         mAuthorDetail=FirebaseDatabase.getInstance().getReference("author");
         mFriendReqDatabase= FirebaseDatabase.getInstance().getReference().child("friends_req");
+        mReaderDatabase=FirebaseDatabase.getInstance().getReference().child("reader");
 
         currentUser= FirebaseAuth.getInstance().getCurrentUser();
 
