@@ -50,23 +50,24 @@
         <activity android:name=".recycle_home.StartActivity" />
         <activity android:name=".EnterDataTemp" />
         <activity android:name=".AuthorRegisteration" />
-        <activity
-            android:name=".AuthorDisplayProfile" />
+        <activity android:name=".AuthorDisplayProfile" />
         <activity android:name=".ViewPager.InboxActivity">
             <intent-filter>
-                <action android:name="com.example.hardik.myapplication"></action>
-                <category android:name="android.intent.category.DEFAULT"></category>
-            </intent-filter>
+                <action android:name="com.example.hardik.myapplication" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
-        <service
-            android:name=".POJO.FirebaseNotificationService">
+        <service android:name=".POJO.FirebaseNotificationService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
+        <activity android:name=".ViewPager.ChatActivity"
+            android:parentActivityName=".ViewPager.InboxActivity">
+        </activity>
     </application>
 
 </manifest>

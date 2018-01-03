@@ -37,8 +37,8 @@ public class AuthorListAdapter extends RecyclerView.Adapter<AuthorListAdapter.My
 
         holder.name.setText(authorList.get(position).getName());
 
-        boolean  online_status=  authorList.get(position).isOnline();
-        if(online_status){
+        String  online_status=  authorList.get(position).isOnline();
+        if(online_status.equals("true")){
             holder.onlineDot.setVisibility(View.VISIBLE);
         }
 

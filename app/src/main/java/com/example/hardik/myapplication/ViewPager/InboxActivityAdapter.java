@@ -18,14 +18,14 @@ public class InboxActivityAdapter extends FragmentPagerAdapter {
 
         switch (position){
             case 0:
-                FriendRequestTab friendRequestTab=new FriendRequestTab();
-                return friendRequestTab;
-            case 1:
                 FriendChatsTab friendChatsTab=new FriendChatsTab();
                 return  friendChatsTab;
-            case 2:
+            case 1:
                 FriendsTab friendsTab=new FriendsTab();
                 return friendsTab;
+            case 2:
+                FriendRequestTab friendRequestTab=new FriendRequestTab();
+                return friendRequestTab;
             default:
                 return null;
         }
@@ -36,11 +36,12 @@ public class InboxActivityAdapter extends FragmentPagerAdapter {
 
         switch (position){
             case 0:
-                return "request";
-            case 1:
                 return "chat";
-            case 2:
+            case 1:
                 return "friends";
+            case 2:
+                return "request";
+
             default:
                 return null;
         }

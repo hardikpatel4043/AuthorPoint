@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 import java.io.File;
 
@@ -42,22 +43,22 @@ public class MainActivity extends AppCompatActivity
             finish();
         }else {
 
-            mUserRef.child("online").setValue(true);
+            mUserRef.child("online").setValue("true");
         }
 
     }//End of onStart() method
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onDestroy() {
+        super.onDestroy();
 
         firebaseAuth=FirebaseAuth.getInstance();
         if(firebaseAuth.getCurrentUser()!=null){
-            mUserRef.child("online").setValue(false);
+
+            mUserRef.child("online").setValue("offline");
         }
 
-
-    }//End of onStop() method
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,7 +174,7 @@ public class MainActivity extends AppCompatActivity
             //To stop user from login without password after logout
 
 
-            mUserRef.child("online").setValue(false);
+            mUserRef.child("online").setValue("offline");
 
             startActivity(new Intent(getApplicationContext(),StartActivity.class));
             finish();

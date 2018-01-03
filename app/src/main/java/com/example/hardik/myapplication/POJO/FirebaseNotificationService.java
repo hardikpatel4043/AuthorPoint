@@ -59,7 +59,6 @@ public class FirebaseNotificationService extends FirebaseMessagingService {
 
         mBuilder.setContentIntent(resultPendingIntent);
 
-
         if(current_user_id.equals(targetUser)){
 
             NotificationManager mNotifyMgr =

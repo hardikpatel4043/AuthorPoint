@@ -1,6 +1,7 @@
 package com.example.hardik.myapplication.ViewPager;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -9,7 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.hardik.myapplication.AuthorDisplayProfile;
 import com.example.hardik.myapplication.AuthorList;
+import com.example.hardik.myapplication.ItemClick.RecyclerItemClickListener;
 import com.example.hardik.myapplication.POJO.AuthorRegister;
 import com.example.hardik.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;

@@ -14,6 +14,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
@@ -50,7 +51,7 @@ public class OfflineAuthorPoint extends Application {
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
                     if(dataSnapshot!=null) {
-                        mUserReference.child(mCurrentUser.getUid()).child("online").onDisconnect().setValue(false);
+                        mUserReference.child(mCurrentUser.getUid()).child("online").onDisconnect().setValue("offline");
                         //mUserReference.child(mCurrentUser.getUid()).child("online").setValue(true);
                     }
                 }

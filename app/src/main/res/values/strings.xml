@@ -22,6 +22,23 @@
     <string name="name">Name</string>
     <string name="email">Email</string>
     <string name="mobilenumber">MobileNumber</string>
+    <string name="type_message_here">Type message here</string>
+    <string name="todo">TODO</string>
+    <string name="decline_friend_request">Decline Friend request</string>
+    <string name="send_friend_request">Send Friend Request</string>
+    <string name="textview">TextView</string>
+    <string name="books">Books</string>
+    <string name="authors">Authors</string>
+    <string name="events">Events</string>
+    <string name="android_studio_android_com">android.studio@android.com</string>
+    <string name="android_studio">Android Studio</string>
+    <string name="mobile_no">mobile no</string>
+    <string name="submit">submit</string>
+    <string name="verify">verify</string>
+    <string name="otp">otp</string>
+    <string name="reset">Reset</string>
+    <string name="login_as_reader">Login As Reader</string>
+    <string name="login_as_author">Login As Author</string>
 
     <!--this filed are enter for render problem solve for xml-->
     <item name="visible" type="id" />

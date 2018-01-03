@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 public class AuthorRegisteration extends AppCompatActivity {
 
@@ -85,7 +86,8 @@ public class AuthorRegisteration extends AppCompatActivity {
 
                     // String id=ref.push().getKey();
                     String id=user.getUid();
-                    AuthorRegister dataEnter=new AuthorRegister(phone,"default","defalut",emailInput,uname,"default","default",false);
+                    AuthorRegister dataEnter=new AuthorRegister(phone,"default","defalut",
+                            emailInput,uname,"default","default",""+ ServerValue.TIMESTAMP);
                     mDatabase.child(id).setValue(dataEnter);
 
                     Toast.makeText(AuthorRegisteration.this,"Succesfully Registerd",Toast.LENGTH_SHORT).show();

@@ -4,27 +4,23 @@ package com.example.hardik.myapplication.POJO;
  * Created by Hardik on 12/27/2017.
  */
     public class AuthorRegister {
-        private String phone;
-
-        private String follower;
 
         public AuthorRegister(){
 
         }
 
-    public boolean isOnline() {
+    public String isOnline() {
         return online;
     }
 
-    public void setOnline(boolean online) {
+    public void setOnline(String online) {
         this.online = online;
     }
 
-    public AuthorRegister(String phone, String follower, String buyBook, String email, String name, String image, String ownBook, boolean online) {
+    public AuthorRegister(String phone, String follower, String buyBook, String email, String name, String image, String ownBook, String online) {
         this.phone = phone;
         this.follower = follower;
         this.buyBook = buyBook;
-
         this.email = email;
         this.name = name;
         this.image = image;
@@ -32,7 +28,11 @@ package com.example.hardik.myapplication.POJO;
         this.online=online;
         }
 
-        private boolean online;
+        private String phone;
+
+        private String follower;
+
+        private String online;
 
         private String buyBook;
 
