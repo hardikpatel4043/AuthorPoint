@@ -110,7 +110,8 @@ public class FriendChatsTab extends Fragment {
             }
         });
 
-        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), recyclerView,
+                new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Intent inDetail=new Intent(getActivity(),ChatActivity.class);

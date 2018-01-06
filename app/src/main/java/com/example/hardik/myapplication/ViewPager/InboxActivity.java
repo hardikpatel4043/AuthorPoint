@@ -2,11 +2,13 @@ package com.example.hardik.myapplication.ViewPager;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
+import com.example.hardik.myapplication.HomePageFragment;
 import com.example.hardik.myapplication.R;
 import com.example.hardik.myapplication.recycle_home.StartActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,6 +52,8 @@ public class InboxActivity extends AppCompatActivity {
         viewPager=findViewById(R.id.inbox_view_pager);
         inboxActivityAdapter =new InboxActivityAdapter(getSupportFragmentManager());
         viewPager.setAdapter(inboxActivityAdapter);
+
+        viewPager.setCurrentItem(1);
 
         tabLayout=findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);

@@ -55,16 +55,17 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
 
         if(current_user_id.equals(get_user_id)){
 
-        holder.message.setBackgroundColor(Color.WHITE);
-        holder.message.setTextColor(Color.BLACK);
-        holder.message.setText(messageList.get(position).getMessage());
-//        RelativeLayout.LayoutParams Params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
-//        Params.setMarginStart(500);
-//        holder.message.setLayoutParams(Params);
-        }else{
+//        holder.message.setBackgroundColor(Color.WHITE);
+//        holder.message.setTextColor(Color.BLACK);
 
-        holder.message.setBackgroundResource(R.drawable.message_background);
-        holder.message.setTextColor(Color.WHITE);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        params.addRule(RelativeLayout.ALIGN_PARENT_END);
+        holder.message.setLayoutParams(params);
+        holder.message.setText(messageList.get(position).getMessage());
+
+       } else {
+
+//        holder.message.setBackgroundResource(R.drawable.message_background);
         holder.message.setText(messageList.get(position).getMessage());
         }
 

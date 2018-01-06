@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity
 
         firebaseAuth=FirebaseAuth.getInstance();
         if(firebaseAuth.getCurrentUser()!=null){
-
             mUserRef.child("online").setValue("offline");
         }
 

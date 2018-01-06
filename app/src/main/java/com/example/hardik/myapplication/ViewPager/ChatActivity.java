@@ -34,7 +34,6 @@ import java.util.Map;
 
 public class ChatActivity extends AppCompatActivity {
 
-
     Toolbar toolbar;
 
     DatabaseReference mRootRef;
@@ -105,7 +104,7 @@ public class ChatActivity extends AppCompatActivity {
 
         //-----------------------------------------------------------------------------------------
 
-        mRootRef.child("chat").addValueEventListener(new ValueEventListener() {
+        mRootRef.child("chat").child(mCurrentUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -153,11 +152,11 @@ public class ChatActivity extends AppCompatActivity {
 
         //------------------------------------------------------------------
 
-    }
+    }//End of onCreate method
 //--------------------------------------------------------------------------
     private void loadMessages() {
 
-        messageList.clear();
+
         mRootRef.child("messages").child(mCurrentUser.getUid()).child(mChatUserId).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
