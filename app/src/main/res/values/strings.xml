@@ -19,9 +19,9 @@
 
     <string name="facebook_app_id">1909541186041817</string>
     <string name="fb_login_protocol_scheme">fb1909541186041817</string>
-    <string name="name">Name</string>
-    <string name="email">Email</string>
-    <string name="mobilenumber">MobileNumber</string>
+    <string name="name">Name:</string>
+    <string name="email">Email:</string>
+    <string name="mobilenumber">MobileNumber:</string>
     <string name="type_message_here">Type message here</string>
     <string name="todo">TODO</string>
     <string name="decline_friend_request">Decline Friend request</string>
@@ -39,6 +39,8 @@
     <string name="reset">Reset</string>
     <string name="login_as_reader">Login As Reader</string>
     <string name="login_as_author">Login As Author</string>
+    <string name="forgot_password">forgot password</string>
+    <string name="login">Login</string>
 
     <!--this filed are enter for render problem solve for xml-->
     <item name="visible" type="id" />

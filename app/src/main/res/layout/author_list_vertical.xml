@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- This layout for the Author in the vertical view of all fragment activity AuthorList.java -->
+<!-- This layout for the Author in the vertical view of all fragment activity AuthorLjava.pdfjava -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"

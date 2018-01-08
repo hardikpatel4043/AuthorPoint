@@ -1,14 +1,17 @@
 package com.example.hardik.myapplication.POJO;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Hardik on 12/30/2017.
  */
 
-public class Book {
+public class Book implements Parcelable {
 
-        public Book(){
+    public Book(){
 
-        }
+    }
 
     public Book(String time, int price, String name, String bookId, String language, String book_type, Review review, String authorId,String image) {
         this.time = time;
@@ -22,19 +25,57 @@ public class Book {
         this.image=image;
     }
 
-    public String getImage() {
-        return image;
+    protected Book(Parcel in) {
+        name = in.readString();
+        image = in.readString();
+        time = in.readString();
+        price = in.readInt();
+        bookId = in.readString();
+        language = in.readString();
+        book_type = in.readString();
+        authorId = in.readString();
+        review=in.readParcelable(Review.class.getClassLoader());
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
+        parcel.writeString(this.name);
+        parcel.writeString(this.image);
+        parcel.writeString(this.time);
+        parcel.writeInt(this.price);
+        parcel.writeString(this.bookId);
+        parcel.writeString(this.language);
+        parcel.writeString(this.book_type);
+        parcel.writeString(this.authorId);
+        parcel.writeParcelable(this.review,i);
     }
 
-    private String image;
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
-         private String time;
 
-         private int price;
+    public static final Creator<Book> CREATOR = new Creator<Book>() {
+        @Override
+        public Book createFromParcel(Parcel in) {
+            return new Book(in);
+        }
+
+        @Override
+        public Book[] newArray(int size) {
+            return new Book[size];
+        }
+    };
+
+
+
+        private String image;
+
+        private String time;
+
+        private int price;
 
         private String name;
 
@@ -127,8 +168,18 @@ public class Book {
         {
             this.authorId = authorId;
         }
+        public String getImage() {
+            return image;
+         }
+
+        public void setImage(String image) {
+            this.image = image;
+         }
+
 
     }
+
+
 
 
 

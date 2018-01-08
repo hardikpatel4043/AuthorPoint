@@ -65,9 +65,10 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".ViewPager.ChatActivity"
-            android:parentActivityName=".ViewPager.InboxActivity">
-        </activity>
+        <activity
+            android:name=".ViewPager.ChatActivity"
+            android:parentActivityName=".ViewPager.InboxActivity"></activity>
+        <activity android:name=".BookPdfRead"></activity>
     </application>
 
 </manifest>

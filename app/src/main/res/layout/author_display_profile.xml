@@ -24,7 +24,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="104dp"
-        android:text="@string/textview"
+        android:text="@string/name"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.437"
@@ -34,15 +34,14 @@
     <TextView
         android:id="@+id/author_in_detail_phone"
         android:layout_width="wrap_content"
-        android:layout_height="23dp"
-        android:layout_marginEnd="16dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="56dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="60dp"
-        android:text="@string/textview"
+        android:layout_marginTop="72dp"
+        android:text="@string/mobilenumber"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.089"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView13"
         app:layout_constraintTop_toBottomOf="@+id/author_in_detail_email" />
 
     <TextView
@@ -51,11 +50,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="76dp"
-        android:text="@string/textview"
+        android:layout_marginTop="72dp"
+        android:text="@string/email"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.087"
+        app:layout_constraintHorizontal_bias="0.406"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/author_in_detail_profile_image" />
 
@@ -63,10 +62,12 @@
         android:id="@+id/author_display_friend_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="@string/send_friend_request"
+        app:layout_constraintBottom_toTopOf="@+id/author_display_decline_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/author_in_detail_phone" />
@@ -80,11 +81,49 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/decline_friend_request"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/author_display_friend_button"
-        app:layout_constraintVertical_bias="0.102"
-        android:visibility="invisible"/>
+        app:layout_constraintVertical_bias="0.877" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="104dp"
+        android:text="@string/name"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/author_in_detail_name"
+        app:layout_constraintHorizontal_bias="0.733"
+        app:layout_constraintStart_toEndOf="@+id/author_in_detail_profile_image"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="72dp"
+        android:text="@string/email"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/author_in_detail_email"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/author_in_detail_profile_image" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="72dp"
+        android:text="@string/mobilenumber"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/author_in_detail_phone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 </android.support.constraint.ConstraintLayout>
