@@ -30,6 +30,7 @@ dependencies {
 
     implementation 'com.android.support:support-v4:27.0.2'
     implementation 'com.google.firebase:firebase-messaging:11.6.2'
+    implementation 'com.google.firebase:firebase-storage:11.6.2'
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -45,6 +46,7 @@ dependencies {
     compile 'com.firebaseui:firebase-ui-storage:3.1.2'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.paypal.sdk:paypal-android-sdk:2.15.3'
+    compile 'com.theartofdev.edmodo:android-image-cropper:2.6.+'
     compile 'com.github.barteksc:android-pdf-viewer:2.8.2'
     testCompile 'junit:junit:4.12'
 }

@@ -19,8 +19,8 @@
 
             <ImageView
                 android:id="@+id/author_image"
-                android:layout_width="150dp"
-                android:layout_height="120dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:contentDescription="@string/todo" />
 
             <TextView

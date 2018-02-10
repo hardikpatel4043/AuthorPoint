@@ -7,8 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.hardik.myapplication.POJO.Author;
 import com.example.hardik.myapplication.R;
 
 import java.util.List;
@@ -19,7 +20,6 @@ import static com.facebook.FacebookSdk.getApplicationContext;
  * Created by Hardik on 12/7/2017.
  */
 public class AuthorAdapter extends RecyclerView.Adapter<AuthorAdapter.MyViewHolder> {
-
 
     private List<Author> authorList;
     private Context context;
@@ -35,11 +35,13 @@ public class AuthorAdapter extends RecyclerView.Adapter<AuthorAdapter.MyViewHold
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-          holder.name.setText(authorList.get(position).getName());
+        holder.name.setText(authorList.get(position).getName());
 
-         holder.image.setImageResource(authorList.get(position).getImage());
-       //Glide.with(getApplicationContext()).load(authorImage.getImageUrl()).into(holder.image);
-
+        if(authorList.get(position).getImage().equals("default")){
+            Glide.with(context).load(R.drawable.default_avatar).apply(RequestOptions.circleCropTransform()).into(holder.image);
+        }else{
+            Glide.with(context).load(authorList.get(position).getImage()).apply(RequestOptions.circleCropTransform()).into(holder.image);
+        }
 
     }
 

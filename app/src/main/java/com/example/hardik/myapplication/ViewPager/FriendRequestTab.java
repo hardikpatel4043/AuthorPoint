@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.hardik.myapplication.POJO.AuthorRegister;
+import com.example.hardik.myapplication.POJO.Author;
 import com.example.hardik.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,7 +29,7 @@ public class FriendRequestTab extends Fragment {
     private DatabaseReference mReaderDatabase;
 
     public List<String> friendReqList;
-    private List<AuthorRegister> mAuthorFriendList;
+    private List<Author> mAuthorFriendList;
 
     private RecyclerView recyclerView;
     private FriendRequestAdapter mAdapter;
@@ -91,7 +91,7 @@ public class FriendRequestTab extends Fragment {
                                 String id=snapshot.getKey().toString();
 
                                 if(id.equals(getId)){
-                                    AuthorRegister authorData = snapshot.getValue(AuthorRegister.class);
+                                    Author authorData = snapshot.getValue(Author.class);
                                     mAuthorFriendList.add(authorData);
                                 }
                             }

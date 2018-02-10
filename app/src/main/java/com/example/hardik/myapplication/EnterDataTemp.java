@@ -32,7 +32,7 @@ public class EnterDataTemp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_data_temp);
 
-        database=FirebaseDatabase.getInstance().getReference("book");
+        database=FirebaseDatabase.getInstance().getReference("events");
         user= FirebaseAuth.getInstance().getCurrentUser();
 
         layout1=findViewById(R.id.textInputLayout1);
@@ -41,17 +41,15 @@ public class EnterDataTemp extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                   String id=user.getUid();
+                String id=user.getUid();
 
                 String pushId=database.push().getKey();
                 String parameter =layout1.getEditText().getText().toString();
-
-                Review fakeReview=new Review("nice book");
+                Review fakeReview=new Review("very great book");
 
                 String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-                Book enterData=new Book(timeStamp,100,"you can win","book001","english","motivational",fakeReview,"jakdfjdlf","default");
+                Book enterData=new Book(timeStamp,89,"Everyone has a story ","book003","english","motivational",fakeReview,"jakdfjdlf","default");
                 database.child(pushId).setValue(enterData);
-
 
             }
         });

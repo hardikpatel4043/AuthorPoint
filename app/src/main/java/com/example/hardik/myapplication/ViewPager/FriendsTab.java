@@ -1,7 +1,6 @@
 package com.example.hardik.myapplication.ViewPager;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,10 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.hardik.myapplication.AuthorDisplayProfile;
-import com.example.hardik.myapplication.AuthorList;
-import com.example.hardik.myapplication.ItemClick.RecyclerItemClickListener;
-import com.example.hardik.myapplication.POJO.AuthorRegister;
+import com.example.hardik.myapplication.POJO.Author;
 import com.example.hardik.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,14 +20,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public class FriendsTab extends Fragment {
 
-    private List<AuthorRegister> mFriendsDetailList;
+    private List<Author> mFriendsDetailList;
     private List<String> mFriendIdList;
     private  String currentUserId;
 
@@ -93,7 +87,7 @@ public class FriendsTab extends Fragment {
                                 String id=snapshot.getKey().toString();
 
                                 if(id.equals(getId)){
-                                    AuthorRegister authorData = snapshot.getValue(AuthorRegister.class);
+                                    Author authorData = snapshot.getValue(Author.class);
                                     mFriendsDetailList.add(authorData);
                                 }
                             }

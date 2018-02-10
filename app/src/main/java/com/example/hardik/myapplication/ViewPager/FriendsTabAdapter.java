@@ -5,15 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.hardik.myapplication.AuthorDisplayProfile;
-import com.example.hardik.myapplication.POJO.AuthorRegister;
+import com.example.hardik.myapplication.POJO.Author;
 import com.example.hardik.myapplication.R;
 
 import java.util.List;
@@ -25,14 +23,14 @@ import java.util.List;
 public class FriendsTabAdapter extends RecyclerView.Adapter<FriendsTabAdapter.MyViewHolder> {
 
     Context context;
-    List<AuthorRegister> mFriendsList;
+    List<Author> mFriendsList;
     List<String>  mFriendIdList;
 
     public FriendsTabAdapter(){
 
     }
 
-    public FriendsTabAdapter(Context context, List<AuthorRegister> mFriendsList, List<String>  mFriendIdList){
+    public FriendsTabAdapter(Context context, List<Author> mFriendsList, List<String>  mFriendIdList){
         this.context=context;
         this.mFriendIdList=mFriendIdList;
         this.mFriendsList=mFriendsList;

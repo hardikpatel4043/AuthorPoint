@@ -67,9 +67,7 @@ public class Book implements Parcelable {
         public Book[] newArray(int size) {
             return new Book[size];
         }
-    };
-
-
+     };
 
         private String image;
 

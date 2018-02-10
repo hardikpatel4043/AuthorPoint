@@ -5,13 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.hardik.myapplication.ItemClick.RecyclerItemClickListener;
-import com.example.hardik.myapplication.POJO.AuthorRegister;
+import com.example.hardik.myapplication.POJO.Author;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -28,7 +27,7 @@ import java.util.List;
 public class AuthorList extends android.support.v4.app.Fragment {
 
 
-    private List<AuthorRegister> authorList = new ArrayList<>();
+    private List<Author> authorList = new ArrayList<>();
     private List<String> authorId=new ArrayList<>();
     private RecyclerView recyclerView;
     private AuthorListAdapter mAdapter;
@@ -72,16 +71,18 @@ public class AuthorList extends android.support.v4.app.Fragment {
                 authorList.clear();
                 authorId.clear();
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()) {
-                    String key=snapshot.getRef().getKey().toString();
 
+                    String key=snapshot.getRef().getKey().toString();
                     if(current_user_id.equals(key)){
                         continue;
                     }
 
-                    authorId.add(key);
+                    Author authorData = snapshot.getValue(Author.class);
+                    if(authorData.getType().equals("author")){
+                        authorList.add(authorData);
+                        authorId.add(key);
+                    }
 
-                    AuthorRegister authorData = snapshot.getValue(AuthorRegister.class);
-                    authorList.add(authorData);
                 }//End of for Loop
                 recyclerView.setAdapter(mAdapter);
             }

@@ -87,14 +87,18 @@
                 android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>
 
-
-
             <Button
                 android:id="@+id/register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/register" />
 
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/login_with_google"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"/>
         </LinearLayout>
 
 </LinearLayout>

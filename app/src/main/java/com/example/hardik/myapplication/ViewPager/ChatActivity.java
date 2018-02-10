@@ -98,6 +98,8 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+
+
             }
         });
 
@@ -193,7 +195,7 @@ public class ChatActivity extends AppCompatActivity {
 //--------------------------------------------------
     private void sendMessage() {
 
-        String message = messageGet.getText().toString();
+        String message = messageGet.getText().toString().trim();
 
         DatabaseReference message_push=mRootRef.child("messages").child(mCurrentUser.getUid()).child(mChatUserId).push();
         String push_key=message_push.getKey();

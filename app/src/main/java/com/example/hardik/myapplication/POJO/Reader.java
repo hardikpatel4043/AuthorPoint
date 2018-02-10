@@ -12,20 +12,17 @@ public class Reader {
 
     private String mobileNumber;
 
-    private Follow follow=null;
 
     public Reader(){
 
     }
 
-    public Reader(String email,String name,String mobileNumber,String buyBook,Follow follow){
+    public Reader(String email,String name,String mobileNumber,String buyBook){
 
         this.buyBook=buyBook;
         this.email=email;
         this.name=name;
         this.mobileNumber=mobileNumber;
-        this.follow=follow;
-
     }
     public String getBuyBook() {
         return buyBook;
@@ -59,11 +56,4 @@ public class Reader {
         this.mobileNumber = mobileNumber;
     }
 
-    public Follow getFollow() {
-        return follow;
-    }
-
-    public void setFollow(Follow follow) {
-        this.follow = follow;
-    }
 }

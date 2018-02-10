@@ -1,10 +1,7 @@
 package com.example.hardik.myapplication.ViewPager;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.hardik.myapplication.AuthorDisplayProfile;
-import com.example.hardik.myapplication.POJO.AuthorRegister;
+import com.example.hardik.myapplication.POJO.Author;
 import com.example.hardik.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,7 +30,7 @@ import java.util.List;
 public class FriendChatsTabAdapter extends RecyclerView.Adapter<FriendChatsTabAdapter.MyViewHolder> {
 
     Context context;
-    List<AuthorRegister> mFriendsList;
+    List<Author> mFriendsList;
     List<String> mFriendIdList;
     FirebaseUser mCurrent= FirebaseAuth.getInstance().getCurrentUser();
     String mCurrent_user_id=mCurrent.getUid();
@@ -44,7 +40,7 @@ public class FriendChatsTabAdapter extends RecyclerView.Adapter<FriendChatsTabAd
 
     }
 
-    public FriendChatsTabAdapter(Context context, List<AuthorRegister> mFriendsList, List<String> mFriendIdList) {
+    public FriendChatsTabAdapter(Context context, List<Author> mFriendsList, List<String> mFriendIdList) {
         this.context = context;
         this.mFriendIdList = mFriendIdList;
         this.mFriendsList = mFriendsList;

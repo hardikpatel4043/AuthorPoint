@@ -1,13 +1,54 @@
 package com.example.hardik.myapplication.POJO;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Hardik on 12/27/2017.
  */
-    public class AuthorRegister {
+    public class Author implements Parcelable{
 
-        public AuthorRegister(){
+        public Author(){
 
         }
+
+    protected Author(Parcel in) {
+        phone = in.readString();
+        follower = in.readString();
+        online = in.readString();
+        buyBook = in.readString();
+        email = in.readString();
+        name = in.readString();
+        image = in.readString();
+        ownBook = in.readString();
+        type=in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
+        parcel.writeString(phone);
+        parcel.writeString(follower);
+        parcel.writeString(online);
+        parcel.writeString(buyBook);
+        parcel.writeString(email);
+        parcel.writeString(name);
+        parcel.writeString(image);
+        parcel.writeString(ownBook);
+        parcel.writeString(type);
+    }
+
+    public static final Creator<Author> CREATOR = new Creator<Author>() {
+        @Override
+        public Author createFromParcel(Parcel in) {
+            return new Author(in);
+        }
+
+        @Override
+        public Author[] newArray(int size) {
+            return new Author[size];
+        }
+    };
 
     public String isOnline() {
         return online;
@@ -17,7 +58,15 @@ package com.example.hardik.myapplication.POJO;
         this.online = online;
     }
 
-    public AuthorRegister(String phone, String follower, String buyBook, String email, String name, String image, String ownBook, String online) {
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Author(String phone, String follower, String buyBook, String email, String name, String image, String ownBook, String online, String type) {
         this.phone = phone;
         this.follower = follower;
         this.buyBook = buyBook;
@@ -26,7 +75,10 @@ package com.example.hardik.myapplication.POJO;
         this.image = image;
         this.ownBook = ownBook;
         this.online=online;
+        this.type=type;
         }
+
+        private String type;
 
         private String phone;
 
@@ -113,5 +165,13 @@ package com.example.hardik.myapplication.POJO;
         {
             this.ownBook = ownBook;
         }
+
+       @Override
+
+       public int describeContents() {
+        return 0;
     }
+
+
+}
 

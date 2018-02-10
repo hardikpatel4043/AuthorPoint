@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.hardik.myapplication.POJO.Book;
 import com.example.hardik.myapplication.R;
 
 import java.util.List;
@@ -33,9 +35,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        holder.title.setText(bookList.get(position).getTitle());
+        holder.title.setText(bookList.get(position).getName());
 
-        holder.image.setImageResource(bookList.get(position).getImage());
+        Glide.with(context).load(bookList.get(position).getImage()).into(holder.image);
     }
 
     @Override

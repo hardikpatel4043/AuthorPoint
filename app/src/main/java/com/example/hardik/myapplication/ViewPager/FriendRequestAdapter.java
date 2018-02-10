@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.hardik.myapplication.POJO.AuthorRegister;
+import com.example.hardik.myapplication.POJO.Author;
 import com.example.hardik.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,7 +32,7 @@ import java.util.List;
 public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdapter.MyViewHolder> {
 
     private Context context;
-    List<AuthorRegister> mFriedList;
+    List<Author> mFriedList;
     private DatabaseReference mFriendRequestDatabase;
     private DatabaseReference mFriendDatabase;
     private FirebaseUser mCurrentUser;
@@ -65,7 +65,7 @@ public class FriendRequestAdapter extends RecyclerView.Adapter<FriendRequestAdap
         return mFriedList.size();
     }
 
-    public FriendRequestAdapter(Context context,List<AuthorRegister> mFriedList,List<String> viewId){
+    public FriendRequestAdapter(Context context, List<Author> mFriedList, List<String> viewId){
         this.context=context;
         this.mFriedList=mFriedList;
         this.viewId=viewId;

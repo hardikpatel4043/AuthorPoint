@@ -19,9 +19,12 @@ import com.example.hardik.myapplication.recycle_home.StartActivity;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity
     FirebaseUser user;
     FirebaseAuth firebaseAuth;
     DatabaseReference mUserRef;
+
 
     @Override
     protected void onStart() {
@@ -56,7 +60,6 @@ public class MainActivity extends AppCompatActivity
         if(firebaseAuth.getCurrentUser()!=null){
             mUserRef.child("online").setValue("offline");
         }
-
     }
 
     @Override
@@ -68,12 +71,13 @@ public class MainActivity extends AppCompatActivity
         user=FirebaseAuth.getInstance().getCurrentUser();
 
         if(firebaseAuth.getCurrentUser()!=null){
-            mUserRef=FirebaseDatabase.getInstance().getReference("author").child(user.getUid());
+
+        mUserRef = FirebaseDatabase.getInstance().getReference("author").child(user.getUid());
+
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -85,9 +89,9 @@ public class MainActivity extends AppCompatActivity
 
         TextView text=navigationView.getHeaderView(0).findViewById(R.id.textView);
 
-       if(firebaseAuth.getCurrentUser()!=null){
+        if(firebaseAuth.getCurrentUser()!=null){
            text.setText(user.getEmail());
-       }
+        }
         navigationView.setNavigationItemSelectedListener(this);
 
         //set homepage on loading
@@ -122,12 +126,8 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
 
-            return true;
-        }else if(id==R.id.change_password){
-            ChangePassword fragment=new ChangePassword();
-            FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frame,fragment);
-            fragmentTransaction.commit();
+            startActivity(new Intent(MainActivity.this,ProfileSettings.class));
+
             return true;
         }
 
@@ -164,7 +164,8 @@ public class MainActivity extends AppCompatActivity
 
         }else if(id==R.id.inbox){
 
-            startActivity(new Intent(MainActivity.this, InboxActivity.class));
+            //startActivity(new Intent(MainActivity.this,EnterDataTemp.class));
+                startActivity(new Intent(MainActivity.this, InboxActivity.class));
 
         } else if (id == R.id.nav_logout) {
 
@@ -172,13 +173,16 @@ public class MainActivity extends AppCompatActivity
             FirebaseAuth.getInstance().signOut();
             //To stop user from login without password after logout
 
-
             mUserRef.child("online").setValue("offline");
 
             startActivity(new Intent(getApplicationContext(),StartActivity.class));
             finish();
 
+        }else if(id==R.id.nav_event){
+
+            startActivity(new Intent(getApplicationContext(),EventUpload.class));
         }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

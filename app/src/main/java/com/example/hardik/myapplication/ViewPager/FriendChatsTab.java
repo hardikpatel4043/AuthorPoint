@@ -10,9 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.hardik.myapplication.AuthorDisplayProfile;
 import com.example.hardik.myapplication.ItemClick.RecyclerItemClickListener;
-import com.example.hardik.myapplication.POJO.AuthorRegister;
+import com.example.hardik.myapplication.POJO.Author;
 import com.example.hardik.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,7 +26,7 @@ import java.util.List;
 
 public class FriendChatsTab extends Fragment {
 
-    private List<AuthorRegister> mFriendsDetailList;
+    private List<Author> mFriendsDetailList;
     private List<String> mFriendIdList;
     private  String currentUserId;
 
@@ -89,7 +88,7 @@ public class FriendChatsTab extends Fragment {
                                 String id=snapshot.getKey().toString();
 
                                 if(id.equals(getId)){
-                                    AuthorRegister authorData = snapshot.getValue(AuthorRegister.class);
+                                    Author authorData = snapshot.getValue(Author.class);
                                     mFriendsDetailList.add(authorData);
                                 }
                             }
