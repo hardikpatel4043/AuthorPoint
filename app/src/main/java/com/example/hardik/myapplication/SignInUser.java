@@ -62,25 +62,25 @@ public class SignInUser extends AppCompatActivity  {
         progressBar=findViewById(R.id.progressBar2);
 
 
-        //facebook login
-        mCallbackManager = CallbackManager.Factory.create();
-        LoginButton loginButton = findViewById(R.id.login_button);
-        loginButton.setReadPermissions("email", "public_profile");
-        loginButton.setLoginBehavior(LoginBehavior.NATIVE_WITH_FALLBACK);
-        loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                signInWithFacebook(loginResult.getAccessToken());
-            }
-            @Override
-            public void onCancel() {
-                Toast.makeText(getApplicationContext(),"Error on Lgoin",Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onError(FacebookException error) {
-                Toast.makeText(getApplicationContext(),"Error on Lgoin",Toast.LENGTH_SHORT).show();
-            }
-        });
+//        //facebook login
+//        mCallbackManager = CallbackManager.Factory.create();
+//        LoginButton loginButton = findViewById(R.id.login_button);
+//        loginButton.setReadPermissions("email", "public_profile");
+//        loginButton.setLoginBehavior(LoginBehavior.NATIVE_WITH_FALLBACK);
+//        loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+//            @Override
+//            public void onSuccess(LoginResult loginResult) {
+//                signInWithFacebook(loginResult.getAccessToken());
+//            }
+//            @Override
+//            public void onCancel() {
+//                Toast.makeText(getApplicationContext(),"Error on Lgoin",Toast.LENGTH_SHORT).show();
+//            }
+//            @Override
+//            public void onError(FacebookException error) {
+//                Toast.makeText(getApplicationContext(),"Error on Lgoin",Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         //------------------------login with email and password-----------------------------
         submit.setOnClickListener(new View.OnClickListener() {
@@ -144,24 +144,24 @@ public class SignInUser extends AppCompatActivity  {
     }//end of onCreate() method
 
     //-------------------------login with facebook-------------------
-    private void signInWithFacebook(AccessToken token) {
-        // progressBar.setVisibility(View.VISIBLE);
-        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        Log.e("credital",credential.toString());
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-
-                        if (!task.isSuccessful()) {
-                            Toast.makeText(SignInUser.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }else{
-                            Intent i=new Intent(SignInUser.this,MainActivity.class);
-                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(i);
-                        }
-                    }
-                });
-    }
+//    private void signInWithFacebook(AccessToken token) {
+//        // progressBar.setVisibility(View.VISIBLE);
+//        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+//        Log.e("credital",credential.toString());
+//        mAuth.signInWithCredential(credential)
+//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//
+//                        if (!task.isSuccessful()) {
+//                            Toast.makeText(SignInUser.this, "Authentication failed.",
+//                                    Toast.LENGTH_SHORT).show();
+//                        }else{
+//                            Intent i=new Intent(SignInUser.this,MainActivity.class);
+//                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                            startActivity(i);
+//                        }
+//                    }
+//                });
+//    }
 }//end of class

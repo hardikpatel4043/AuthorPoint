@@ -20,7 +20,6 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".SelectUserLogin" />
         <activity android:name=".ReaderRegister" />
         <activity android:name=".SignInUser" />
 
@@ -75,7 +74,8 @@
             android:theme="@style/Base.Theme.AppCompat" />
         <activity android:name=".EventUpload" />
         <activity android:name=".ChangePassword" />
-        <activity android:name=".SplashScreen">
+        <activity android:name=".SplashScreen"
+            android:theme="@style/Theme.Transparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

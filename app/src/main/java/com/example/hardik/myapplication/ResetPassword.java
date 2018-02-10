@@ -39,7 +39,7 @@ public class ResetPassword extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(ResetPassword.this,"we have sent you mail",Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(ResetPassword.this,SelectUserLogin.class));
+                            startActivity(new Intent(ResetPassword.this,SignInUser.class));
                         }else{
                             Toast.makeText(ResetPassword.this,"Error ",Toast.LENGTH_LONG).show();
                         }

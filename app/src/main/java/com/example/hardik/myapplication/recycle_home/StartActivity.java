@@ -9,8 +9,8 @@ import android.widget.LinearLayout;
 
 import com.example.hardik.myapplication.AuthorRegisteration;
 import com.example.hardik.myapplication.R;
-import com.example.hardik.myapplication.SelectUserLogin;
 import com.example.hardik.myapplication.ReaderRegister;
+import com.example.hardik.myapplication.SignInUser;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -33,7 +33,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     public void sendMessage(View view){
-        Intent intent =new Intent(this,SelectUserLogin.class);
+        Intent intent =new Intent(this,SignInUser.class);
         startActivity(intent);
     }
 

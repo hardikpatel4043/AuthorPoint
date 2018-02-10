@@ -1,5 +1,6 @@
 package com.example.hardik.myapplication;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,7 +28,6 @@ public class OTPVerification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.otpverification);
-
 
         mobile=findViewById(R.id.editText);
         otp=findViewById(R.id.editText2);
@@ -59,6 +59,7 @@ public class OTPVerification extends AppCompatActivity {
             @Override
             public void onVerificationCompleted(PhoneAuthCredential credential) {
                 Toast.makeText(OTPVerification.this,"Verified",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
 
             @Override

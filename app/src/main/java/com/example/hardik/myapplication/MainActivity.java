@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity
     FirebaseAuth firebaseAuth;
     DatabaseReference mUserRef;
 
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -170,7 +169,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         if (id == R.id.nav_home_page) {
             // Handle the camera action
-            setTitle("Homepage");
+            setTitle("Dashboard");
             HomePageFragment fragment=new HomePageFragment();
             FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame,fragment);

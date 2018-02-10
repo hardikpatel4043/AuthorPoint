@@ -18,7 +18,8 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:srcCompat="@drawable/logo" />
+            android:layout_margin="05dp"
+            app:srcCompat="@drawable/logo_main" />
 
     </LinearLayout>
 
@@ -52,11 +53,14 @@
         android:layout_weight="3.5"
         android:weightSum="2"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="05dp"
             android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
             android:onClick="sendMessage"
             android:text="Login" />
 
@@ -64,7 +68,9 @@
             android:id="@+id/register"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="05dp"
             android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
             android:onClick="gotoRegister"
             android:text="Register" />
 

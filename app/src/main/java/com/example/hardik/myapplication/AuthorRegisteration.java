@@ -181,7 +181,7 @@ public class AuthorRegisteration extends AppCompatActivity {
                     mDatabase.child(id).setValue(dataEnter);
 
                     Toast.makeText(AuthorRegisteration.this,"Succesfully Registerd",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(),SignInUser.class));
+                    startActivity(new Intent(getApplicationContext(),OTPVerification.class));
                     finish();
                 }else{
                     Toast.makeText(AuthorRegisteration.this,"Registeration Error",Toast.LENGTH_SHORT).show();
