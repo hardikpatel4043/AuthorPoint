@@ -1,6 +1,8 @@
 package com.example.hardik.myapplication;
 
 import android.content.Intent;
+import android.media.Image;
+import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -12,8 +14,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.hardik.myapplication.ViewPager.InboxActivity;
 import com.example.hardik.myapplication.recycle_home.StartActivity;
 import com.facebook.login.LoginManager;
@@ -25,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 
@@ -87,10 +93,33 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
-        TextView text=navigationView.getHeaderView(0).findViewById(R.id.textView);
+        TextView text=navigationView.getHeaderView(0).findViewById(R.id.main_page_email);
+        final TextView userName=navigationView.getHeaderView(0).findViewById(R.id.main_page_name);
+        final ImageView profileImage=navigationView.getHeaderView(0).findViewById(R.id.main_page_profile);
 
         if(firebaseAuth.getCurrentUser()!=null){
-           text.setText(user.getEmail());
+            Uri photoUrl=user.getPhotoUrl();
+            text.setText(user.getEmail());
+
+            if(photoUrl==null){
+                mUserRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        Glide.with(getApplicationContext()).load(dataSnapshot.child("image").getValue()).apply(RequestOptions.circleCropTransform()).into(profileImage);
+                        userName.setText(dataSnapshot.child("name").getValue().toString());
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
+            userName.setText(user.getDisplayName());
+            Glide.with(getApplicationContext()).load(photoUrl).apply(RequestOptions.circleCropTransform()).into(profileImage);
+
         }
         navigationView.setNavigationItemSelectedListener(this);
 
