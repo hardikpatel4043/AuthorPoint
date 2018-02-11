@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.hardik.myapplication.POJO.Author;
-import com.facebook.CallbackManager;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -48,7 +47,7 @@ public class ReaderRegister extends AppCompatActivity implements View.OnClickLis
         firebaseAuth = FirebaseAuth.getInstance();
         ref=FirebaseDatabase.getInstance().getReference("author");
         
-        name=(EditText) findViewById(R.id.name);
+        name=(EditText) findViewById(R.id.event_name);
         e=(EditText)findViewById(R.id.email);
         phone=(EditText)findViewById(R.id.phone);
         password=(EditText)findViewById(R.id.pass);

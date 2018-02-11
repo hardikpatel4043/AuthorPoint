@@ -3,11 +3,13 @@ package com.example.hardik.myapplication;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -31,43 +33,42 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 public class ProfileSettings extends AppCompatActivity {
 
-    Button profileImage,changePassword;
-    ImageView profile;
+    Button changePassword;
+    ImageView profile,profileImage;
     StorageReference mImageRef;
     DatabaseReference mRootRef;
     FirebaseUser mCurrentUser=FirebaseAuth.getInstance().getCurrentUser();;
     String current_user_id=mCurrentUser.getUid();
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_settings);
+        //SharedPreferences
+        SharedPreferences pref=getApplicationContext().getSharedPreferences("UserDetail",0);
 
         mImageRef= FirebaseStorage.getInstance().getReference();
 
         mRootRef= FirebaseDatabase.getInstance().getReference();
 
-
+       String accountType= pref.getString("user_login_type",null);
         profile=findViewById(R.id.profile_image);
         profileImage=findViewById(R.id.profile_setting_change_profile);
         changePassword=findViewById(R.id.profile_change_password_button);
+
+        if(accountType.equals("google")){
+            changePassword.setEnabled(false);
+        }
 
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 startActivity(new Intent(ProfileSettings.this,ChangePassword.class));
-//                ChangePassword fragment=new ChangePassword();
-//                android.support.v4.app.FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-//               fragmentTransaction.replace(R.id.frame,fragment);
-//               fragmentTransaction.commit();
-//
-//                FragmentManager manager = getFragmentManager();
-//                FragmentTransaction transaction = manager.beginTransaction();
-//                transaction.replace(R.id.frame,fragment);
-//                transaction.addToBackStack(null);
-//                transaction.commit();
-//                startActivityFromFragment(ChangePassword.class,new Intent )
-//                startActivity(new Intent(ProfileSettings.this,ChangePassword.class));
+
             }
         });
 
@@ -94,7 +95,6 @@ public class ProfileSettings extends AppCompatActivity {
                 CropImage.activity()
                         .setAspectRatio(1,1)
                         .start(ProfileSettings.this);
-
             }
         });
     }

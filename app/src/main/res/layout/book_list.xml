@@ -17,7 +17,7 @@
             android:contentDescription="@string/todo"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/com_facebook_button_background"
+            android:src="@drawable/ic_menu_inbox"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="29dp" />
 

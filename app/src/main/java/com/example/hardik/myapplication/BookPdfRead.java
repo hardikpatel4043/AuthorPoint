@@ -7,6 +7,7 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.webkit.WebView;
 
 import com.github.barteksc.pdfviewer.PDFView;
 
@@ -29,6 +30,7 @@ public class BookPdfRead extends AppCompatActivity {
         intent.setDataAndType(Uri.parse(url), "application/pdf");
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         Intent newIntent = Intent.createChooser(intent, "Open File");
+
         try {
             startActivity(newIntent);
         } catch (ActivityNotFoundException e) {

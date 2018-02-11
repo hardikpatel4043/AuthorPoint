@@ -61,6 +61,7 @@ public class HomePageFragment extends android.support.v4.app.Fragment {
         View rootView=inflater.inflate(R.layout.home_page_fragment, container, false);
 
         mRoot= FirebaseDatabase.getInstance().getReference();
+
         recyclerView1 =  (RecyclerView) rootView.findViewById(R.id.recycler_book);
         bAdapter = new BookAdapter(getActivity(),bookList);
         recyclerView1.setHasFixedSize(true);
@@ -86,7 +87,7 @@ public class HomePageFragment extends android.support.v4.app.Fragment {
         RecyclerView.LayoutManager aLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView2.setLayoutManager(aLayoutManager);
         recyclerView2.setAdapter(aAdapter);
-        prepareAuthorData();
+
 
         recyclerView2.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(),
                 recyclerView2, new RecyclerItemClickListener.OnItemClickListener() {
@@ -98,37 +99,22 @@ public class HomePageFragment extends android.support.v4.app.Fragment {
             }
         }));
 
-        //third recycler
-//        recyclerView3 = (RecyclerView) rootView.findViewById(R.id.recycler_event);
-//        eAdapter = new EventAdapter(getActivity(),eventList);
-//        recyclerView3.setHasFixedSize(true);
-//        RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-//        //   RecyclerView.LayoutManager eLayoutManager = new GridLayoutManager(this,1,GridLayoutManager.HORIZONTAL,false);
-//        recyclerView3.setLayoutManager(eLayoutManager);
-//        recyclerView3.setAdapter(eAdapter);
-//      //  prepareEventData();
+        //  third recycler
+        recyclerView3 = (RecyclerView) rootView.findViewById(R.id.recycler_event);
+        eAdapter = new EventAdapter(getActivity(),eventList);
+        recyclerView3.setHasFixedSize(true);
+        RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        //   RecyclerView.LayoutManager eLayoutManager = new GridLayoutManager(this,1,GridLayoutManager.HORIZONTAL,false);
+        recyclerView3.setLayoutManager(eLayoutManager);
+        recyclerView3.setAdapter(eAdapter);
+        
+        prepareAuthorData();
 
         return rootView;
     }
     private void prepareBookData(){
 
-        mRoot.child("book").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                bookList.clear();
-                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                    Book bookData=snapshot.getValue(Book.class);
-                    bookList.add(bookData);
-                }
 
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        bAdapter.notifyDataSetChanged();
     }
 
     private void prepareAuthorData(){
@@ -147,7 +133,7 @@ public class HomePageFragment extends android.support.v4.app.Fragment {
                     }
 
                 }
-                bAdapter.notifyDataSetChanged();
+                aAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -157,25 +143,48 @@ public class HomePageFragment extends android.support.v4.app.Fragment {
         });
 
 
-    }
+        ////////////////////////////////////////////
 
-//    private void prepareEventData(){
-//
-////        String[] desArray = {"new","old"};
-////        String[] nameArray = {"You Can Win", "Half Girlfriend"};
-////
-////        Event a=new Event(nameArray[0],desArray[0]);
-////        eventList.add(a);
-////
-////        Event b=new Event(nameArray[1],desArray[1]);
-////        eventList.add(b);
-////
-////        Event c=new Event(nameArray[0],desArray[0]);
-////        eventList.add(c);
-////
-////        Event d=new Event(nameArray[1],desArray[1]);
-////        eventList.add(d);
-//        bAdapter.notifyDataSetChanged();
-//    }
+        mRoot.child("events").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                eventList.clear();
+
+                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+
+                    Event eventData=snapshot.getValue(Event.class);
+                    eventList.add(eventData);
+                }
+
+                eAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        /////////////////////////////////////////
+
+
+        mRoot.child("book").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                bookList.clear();
+                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+                    Book bookData=snapshot.getValue(Book.class);
+                    bookList.add(bookData);
+                }
+             bAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
 
 }

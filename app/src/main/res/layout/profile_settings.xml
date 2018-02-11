@@ -16,20 +16,22 @@
         app:srcCompat="@drawable/default_avatar" />
 
     <Button
-        android:id="@+id/profile_setting_change_profile"
+        android:id="@+id/profile_change_password_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/profile_image"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
-        android:text="Change Profile Image" />
-
-    <Button
-        android:id="@+id/profile_change_password_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/profile_setting_change_profile"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="Change Password" />
+        android:background="@color/colorPrimaryDark"
+        android:text=" Change Password " />
+
+    <ImageView
+        android:id="@+id/profile_setting_change_profile"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/profile_change_password_button"
+        android:layout_alignStart="@+id/profile_image"
+        android:layout_marginStart="88dp"
+        app:srcCompat="@drawable/change_picture" />
+
 </RelativeLayout>

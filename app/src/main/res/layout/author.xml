@@ -24,7 +24,7 @@
                 android:contentDescription="@string/todo" />
 
             <TextView
-                android:id="@+id/name"
+                android:id="@+id/event_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/author_image"

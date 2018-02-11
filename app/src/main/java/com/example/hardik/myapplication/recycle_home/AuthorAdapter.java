@@ -14,7 +14,6 @@ import com.example.hardik.myapplication.R;
 
 import java.util.List;
 
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by Hardik on 12/7/2017.
@@ -62,7 +61,7 @@ public class AuthorAdapter extends RecyclerView.Adapter<AuthorAdapter.MyViewHold
         public ImageView image;
         public MyViewHolder(View itemView) {
             super(itemView);
-            name=(TextView) itemView.findViewById(R.id.name);
+            name=(TextView) itemView.findViewById(R.id.event_name);
             image=(ImageView) itemView.findViewById(R.id.author_image);
         }
     }//end of Myviewholder

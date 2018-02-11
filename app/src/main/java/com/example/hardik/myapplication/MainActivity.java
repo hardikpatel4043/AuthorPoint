@@ -1,10 +1,14 @@
 package com.example.hardik.myapplication;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,14 +18,15 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.hardik.myapplication.ViewPager.InboxActivity;
 import com.example.hardik.myapplication.recycle_home.StartActivity;
-import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -40,7 +45,9 @@ public class MainActivity extends AppCompatActivity
     FirebaseUser user;
     FirebaseAuth firebaseAuth;
     DatabaseReference mUserRef;
-
+    DrawerLayout drawerLayout;
+    boolean doubleBackToExitPressedOnce = false;
+    
     @Override
     protected void onStart() {
         super.onStart();
@@ -74,6 +81,12 @@ public class MainActivity extends AppCompatActivity
 
         firebaseAuth=FirebaseAuth.getInstance();
         user=FirebaseAuth.getInstance().getCurrentUser();
+        drawerLayout=findViewById(R.id.drawer_layout);
+
+
+        //-------SharedPreferences-------
+        SharedPreferences pref=getApplicationContext().getSharedPreferences("UserDetail",0);
+        final SharedPreferences.Editor editor=pref.edit();
 
         if(firebaseAuth.getCurrentUser()!=null){
 
@@ -90,7 +103,7 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         TextView text=navigationView.getHeaderView(0).findViewById(R.id.main_page_email);
         final TextView userName=navigationView.getHeaderView(0).findViewById(R.id.main_page_name);
@@ -100,13 +113,26 @@ public class MainActivity extends AppCompatActivity
             Uri photoUrl=user.getPhotoUrl();
             text.setText(user.getEmail());
 
+
+
             if(photoUrl==null){
                 mUserRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-
+                        editor.putString("user_login_type","normal_account");
+                        editor.putString("user_type",dataSnapshot.child("type").getValue().toString());
+                        editor.commit();
                         Glide.with(getApplicationContext()).load(dataSnapshot.child("image").getValue()).apply(RequestOptions.circleCropTransform()).into(profileImage);
                         userName.setText(dataSnapshot.child("name").getValue().toString());
+
+                        //------------------------------------------------------------------------
+                        String user=dataSnapshot.child("type").getValue().toString();
+                        if(user.equals("reader")){
+                            Menu nav_Menu = navigationView.getMenu();
+                            nav_Menu.findItem(R.id.nav_event_upload).setVisible(false);
+                            nav_Menu.findItem(R.id.nav_book_upload).setVisible(false);
+                        }
+                        //--------------------------------------------------------------------------
                     }
 
                     @Override
@@ -114,6 +140,10 @@ public class MainActivity extends AppCompatActivity
 
                     }
                 });
+
+            }else{
+                editor.putString("user_login_type","google");
+                editor.commit();
             }
 
             userName.setText(user.getDisplayName());
@@ -125,15 +155,36 @@ public class MainActivity extends AppCompatActivity
         //set homepage on loading
         FragmentTransaction tx=getSupportFragmentManager().beginTransaction();
         tx.replace(R.id.frame,new HomePageFragment()).commit();
-    }
+    }//End of onCreate() method
+
+    //----------------------------------------------------------------------------------------------
 
     @Override
     public void onBackPressed() {
+
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Snackbar snackbar = Snackbar
+                .make(drawerLayout, "Press again to exit", Snackbar.LENGTH_LONG);
+        View snackbarView=snackbar.getView();
+        snackbarView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.colorPrimaryDark));
+        snackbar.show();
+        //Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            //super.onBackPressed();
         }
     }
 
@@ -197,7 +248,6 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_logout) {
 
-            LoginManager.getInstance().logOut();
             FirebaseAuth.getInstance().signOut();
             //To stop user from login without password after logout
 
@@ -208,7 +258,24 @@ public class MainActivity extends AppCompatActivity
 
         }else if(id==R.id.nav_event){
 
-            startActivity(new Intent(getApplicationContext(),EventUpload.class));
+          //  startActivity(new Intent(getApplicationContext(),EventUpload.class));
+
+        }else if(id==R.id.nav_event_upload){
+
+            setTitle("Event Upload");
+            EventUpload fragment=new EventUpload();
+            FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame,fragment);
+            fragmentTransaction.commit();
+
+        }else if(id==R.id.nav_book_upload){
+
+            setTitle("Upload Book");
+            BookUpload fragment=new BookUpload();
+            FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame,fragment);
+            fragmentTransaction.commit();
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -33,8 +33,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
         holder.name.setText(eventList.get(position).getName());
-
-        holder.des.setText(eventList.get(position).getDes());
+        holder.place.setText(eventList.get(position).getPlace());
+        holder.time.setText(eventList.get(position).getTime());
     }
 
     @Override
@@ -50,11 +50,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.MyViewHolder
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView name,des;
+        public TextView name,place,time;
         public MyViewHolder(View itemView) {
             super(itemView);
-            name=(TextView) itemView.findViewById(R.id.event_name);
-            des=(TextView) itemView.findViewById(R.id.event_description);
+            name= itemView.findViewById(R.id.recycler_event_name);
+            place=itemView.findViewById(R.id.recycler_event_place);
+            time=itemView.findViewById(R.id.recycler_event_time);
         }
     }//end of Myviewholder
 }
