@@ -42,6 +42,9 @@
     <string name="forgot_password">forgot password</string>
     <string name="login">Login</string>
 
+
+    <string name="chetan_bhagat">Chetan Bhagat</string>
+
     <!--this filed are enter for render problem solve for xml-->
     <item name="visible" type="id" />
     <item name="masked" type="id" />
