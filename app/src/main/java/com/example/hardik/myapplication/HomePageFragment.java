@@ -125,11 +125,12 @@ public class HomePageFragment extends android.support.v4.app.Fragment {
                 authorList.clear();
 
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                    authorIdList.add(snapshot.getKey());
+
                     Author authorData=snapshot.getValue(Author.class);
 
                     if(authorData.getType().equals("author")){
                         authorList.add(authorData);
+                        authorIdList.add(snapshot.getKey());
                     }
 
                 }

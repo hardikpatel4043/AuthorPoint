@@ -53,6 +53,7 @@
 
 
     <string name="chetan_bhagat">Chetan Bhagat</string>
+    <string name="authorpoint">AuthorPoint</string>
 
     <!--this filed are enter for render problem solve for xml-->
     <item name="visible" type="id" />

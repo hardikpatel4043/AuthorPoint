@@ -28,6 +28,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class AuthorRegisteration extends AppCompatActivity {
 
@@ -130,8 +131,10 @@ public class AuthorRegisteration extends AppCompatActivity {
                             //startActivity(new Intent(SignInUser.this,Home_page.class));
                             user=FirebaseAuth.getInstance().getCurrentUser();
                             String id=user.getUid();
+                            String token_id= FirebaseInstanceId.getInstance().getToken();
+                            mDatabase.child(id).child("device_token").setValue(token_id);
                             Author dataEnter=new Author("NA","default","defalut",
-                                    user.getEmail(),user.getDisplayName(),"default","default",""+ ServerValue.TIMESTAMP,"author");
+                                    user.getEmail(),user.getDisplayName(),"default","default","online","author");
                             mDatabase.child(id).setValue(dataEnter);
 
                             Intent i = new Intent(AuthorRegisteration.this, MainActivity.class);

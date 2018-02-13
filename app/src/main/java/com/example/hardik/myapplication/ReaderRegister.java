@@ -119,7 +119,7 @@ public class ReaderRegister extends AppCompatActivity implements View.OnClickLis
                             user=FirebaseAuth.getInstance().getCurrentUser();
                             String id=user.getUid();
                             Author dataEnter=new Author("NA","default","defalut",
-                                    user.getEmail(),user.getDisplayName(),"default","default",""+ ServerValue.TIMESTAMP,"reader");
+                                    user.getEmail(),user.getDisplayName(),"default","default","online","reader");
                             ref.child(id).setValue(dataEnter);
 
                             Intent i = new Intent(ReaderRegister.this, MainActivity.class);
