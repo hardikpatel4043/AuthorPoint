@@ -76,7 +76,6 @@ public class ChatActivity extends AppCompatActivity {
         chatRecyclerview.setAdapter(mAdapter);
         loadMessages();
 
-        
         //---------------------------------------------------------------------------
         mRootRef.child("author").child(mChatUserId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -124,7 +123,6 @@ public class ChatActivity extends AppCompatActivity {
                     mRootRef.updateChildren(chatUserMap, new DatabaseReference.CompletionListener() {
                         @Override
                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-
 
                         }
                     });

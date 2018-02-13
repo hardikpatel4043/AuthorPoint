@@ -48,7 +48,7 @@ public class EnterDataTemp extends AppCompatActivity {
                 Review fakeReview=new Review("very great book");
 
                 String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-                Book enterData=new Book(timeStamp,89,"Everyone has a story ","book003","english","motivational",fakeReview,"jakdfjdlf","default");
+                Book enterData=new Book("image",timeStamp.toString(),89,"Everyone has a story ","book003","english","motivational",fakeReview,"default","publication","long text","142565745",4);
                 database.child(pushId).setValue(enterData);
 
             }

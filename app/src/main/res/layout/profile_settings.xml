@@ -34,4 +34,14 @@
         android:layout_marginStart="88dp"
         app:srcCompat="@drawable/change_picture" />
 
+    <ProgressBar
+        android:id="@+id/profile_setting_progressbar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/profile_change_password_button"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
+        android:layout_marginBottom="33dp" />
+
 </RelativeLayout>

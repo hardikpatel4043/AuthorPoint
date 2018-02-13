@@ -13,7 +13,8 @@ public class Book implements Parcelable {
 
     }
 
-    public Book(String time, int price, String name, String bookId, String language, String book_type, Review review, String authorId,String image) {
+    public Book(String image, String time, int price, String name, String bookId, String language, String book_type, Review review, String authorId, String publication, String description, String isbn, int rating) {
+        this.image = image;
         this.time = time;
         this.price = price;
         this.name = name;
@@ -22,7 +23,10 @@ public class Book implements Parcelable {
         this.book_type = book_type;
         this.review = review;
         this.authorId = authorId;
-        this.image=image;
+        this.publication = publication;
+        this.description = description;
+        Isbn = isbn;
+        this.rating = rating;
     }
 
     protected Book(Parcel in) {
@@ -35,7 +39,12 @@ public class Book implements Parcelable {
         book_type = in.readString();
         authorId = in.readString();
         review=in.readParcelable(Review.class.getClassLoader());
+        publication=in.readString();
+        description=in.readString();
+        Isbn=in.readString();
+        rating=in.readInt();
     }
+
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
@@ -49,6 +58,11 @@ public class Book implements Parcelable {
         parcel.writeString(this.book_type);
         parcel.writeString(this.authorId);
         parcel.writeParcelable(this.review,i);
+        parcel.writeString(this.publication);
+        parcel.writeString(this.description);
+        parcel.writeString(this.Isbn);
+        parcel.writeInt(rating);
+
     }
 
     @Override
@@ -85,7 +99,47 @@ public class Book implements Parcelable {
 
         private Review review;
 
-        private String authorId;
+    public String getPublication() {
+        return publication;
+    }
+
+    public void setPublication(String publication) {
+        this.publication = publication;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getIsbn() {
+        return Isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        Isbn = isbn;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    private String authorId;
+
+        private String publication;
+
+        private String description;
+
+        private String Isbn;
+
+        private int rating;
 
         public String getTime ()
         {

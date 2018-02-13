@@ -41,6 +41,15 @@
     <string name="login_as_author">Login As Author</string>
     <string name="forgot_password">forgot password</string>
     <string name="login">Login</string>
+    <string name="language">Language</string>
+    <string name="publication">Publication</string>
+    <string name="isbn_no">ISBN No.</string>
+    <string name="book_type">Book Type</string>
+    <string name="buy_book">Buy Book</string>
+    <string name="read_book">Read Book</string>
+    <string name="description">Description</string>
+    <string name="about_this_item">About this Item</string>
+    <string name="long_text">long text .....................</string>
 
     <!--this filed are enter for render problem solve for xml-->
     <item name="visible" type="id" />

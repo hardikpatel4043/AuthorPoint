@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -37,11 +38,9 @@ public class ProfileSettings extends AppCompatActivity {
     ImageView profile,profileImage;
     StorageReference mImageRef;
     DatabaseReference mRootRef;
+    ProgressBar progressBar;
     FirebaseUser mCurrentUser=FirebaseAuth.getInstance().getCurrentUser();;
     String current_user_id=mCurrentUser.getUid();
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +53,11 @@ public class ProfileSettings extends AppCompatActivity {
 
         mRootRef= FirebaseDatabase.getInstance().getReference();
 
-       String accountType= pref.getString("user_login_type",null);
+        String accountType= pref.getString("user_login_type",null);
         profile=findViewById(R.id.profile_image);
         profileImage=findViewById(R.id.profile_setting_change_profile);
         changePassword=findViewById(R.id.profile_change_password_button);
+        progressBar=findViewById(R.id.profile_setting_progressbar);
 
         if(accountType.equals("google")){
             changePassword.setEnabled(false);
@@ -81,6 +81,7 @@ public class ProfileSettings extends AppCompatActivity {
                     Glide.with(getApplicationContext()).load(R.drawable.default_avatar).apply(RequestOptions.circleCropTransform()).into(profile);
                 }
                 Glide.with(getApplicationContext()).load(imageUrl).apply(RequestOptions.circleCropTransform()).into(profile);
+
             }
 
             @Override
@@ -106,7 +107,7 @@ public class ProfileSettings extends AppCompatActivity {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
 
             if (resultCode == RESULT_OK) {
-
+                progressBar.setVisibility(View.VISIBLE);
                 Uri resultUri = result.getUri();
                 Glide.with(getApplicationContext()).load(resultUri).apply(RequestOptions.circleCropTransform()).into(profile);
 
@@ -117,6 +118,10 @@ public class ProfileSettings extends AppCompatActivity {
                                 String download_url=task.getResult().getDownloadUrl().toString();
 
                                 mRootRef.child("author").child(current_user_id).child("image").setValue(download_url);
+
+                                if(task.isSuccessful()){
+                                    progressBar.setVisibility(View.INVISIBLE);
+                                }
 
                             }
                         });

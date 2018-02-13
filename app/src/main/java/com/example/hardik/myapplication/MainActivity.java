@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.hardik.myapplication.POJO.CheckNetwork;
 import com.example.hardik.myapplication.ViewPager.InboxActivity;
 import com.example.hardik.myapplication.recycle_home.StartActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity
     DatabaseReference mUserRef;
     DrawerLayout drawerLayout;
     boolean doubleBackToExitPressedOnce = false;
-    
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -155,6 +156,15 @@ public class MainActivity extends AppCompatActivity
         //set homepage on loading
         FragmentTransaction tx=getSupportFragmentManager().beginTransaction();
         tx.replace(R.id.frame,new HomePageFragment()).commit();
+
+
+        if(CheckNetwork.isInternetAvailable(MainActivity.this)){
+
+            Toast.makeText(MainActivity.this,"Internet connection avilable",Toast.LENGTH_SHORT).show();
+
+        }
+
+
     }//End of onCreate() method
 
     //----------------------------------------------------------------------------------------------
@@ -167,8 +177,7 @@ public class MainActivity extends AppCompatActivity
             return;
         }
         this.doubleBackToExitPressedOnce = true;
-        Snackbar snackbar = Snackbar
-                .make(drawerLayout, "Press again to exit", Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make(drawerLayout, "Press again to exit", Snackbar.LENGTH_LONG);
         View snackbarView=snackbar.getView();
         snackbarView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.colorPrimaryDark));
         snackbar.show();
