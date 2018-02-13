@@ -21,7 +21,7 @@
     <string name="fb_login_protocol_scheme">fb1909541186041817</string>
     <string name="name">Name:</string>
     <string name="email">Email:</string>
-    <string name="mobilenumber">MobileNumber:</string>
+    <string name="mobilenumber">Mobile Number:</string>
     <string name="type_message_here">Type message here</string>
     <string name="todo">TODO</string>
     <string name="decline_friend_request">Decline Friend request</string>
@@ -50,6 +50,9 @@
     <string name="description">Description</string>
     <string name="about_this_item">About this Item</string>
     <string name="long_text">long text .....................</string>
+
+
+    <string name="chetan_bhagat">Chetan Bhagat</string>
 
     <!--this filed are enter for render problem solve for xml-->
     <item name="visible" type="id" />
