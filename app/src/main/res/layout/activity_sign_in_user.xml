@@ -9,6 +9,18 @@
     android:orientation="vertical"
     tools:context="com.example.hardik.myapplication.SignInUser">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="301dp"
+        android:layout_height="77dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="68dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.453"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/autho" android:contentDescription="TODO"/>
+
     <EditText
         android:id="@+id/email"
         android:layout_width="0dp"
@@ -93,17 +105,5 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_end="587dp"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="301dp"
-        android:layout_height="77dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="68dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.453"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/Autho" />
 
 </android.support.constraint.ConstraintLayout>
