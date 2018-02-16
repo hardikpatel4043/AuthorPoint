@@ -10,9 +10,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.hardik.myapplication.ItemClick.RecyclerItemClickListener;
 import com.example.hardik.myapplication.POJO.Book;
+import com.example.hardik.myapplication.POJO.CheckNetwork;
 import com.example.hardik.myapplication.ViewPager.ChatActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,8 +43,19 @@ public class BookList extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
+
         View rootView=inflater.inflate(R.layout.book_list_recyclerview, container, false);
         mBookList=new ArrayList<>();
+
+        // Set title bar
+        getActivity().setTitle("BookList");
+
+        //Check internet connection
+        if(!CheckNetwork.isInternetAvailable(getActivity())){
+            Toast.makeText(getActivity(), "Network is not Available ",Toast.LENGTH_SHORT).show();
+        }
 
         recyclerView=rootView.findViewById(R.id.book_list_recyclerview_tag);
         mBookListAdapter=new BookListAdapter(getActivity(),mBookList);

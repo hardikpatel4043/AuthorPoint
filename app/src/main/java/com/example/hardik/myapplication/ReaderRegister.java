@@ -2,12 +2,14 @@ package com.example.hardik.myapplication;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hardik.myapplication.POJO.Author;
@@ -34,11 +36,11 @@ public class ReaderRegister extends AppCompatActivity implements View.OnClickLis
     private DatabaseReference ref;
     private FirebaseUser user;
     private FirebaseAuth firebaseAuth;
-    private EditText e,password,name,phone;
+    private TextInputLayout e,password,name,phone;
     private SignInButton signInButton;
     private GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 1;
-
+    private TextView alreay_have;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,13 +49,20 @@ public class ReaderRegister extends AppCompatActivity implements View.OnClickLis
         firebaseAuth = FirebaseAuth.getInstance();
         ref=FirebaseDatabase.getInstance().getReference("author");
         
-        name=(EditText) findViewById(R.id.event_name);
-        e=(EditText)findViewById(R.id.email);
-        phone=(EditText)findViewById(R.id.phone);
-        password=(EditText)findViewById(R.id.pass);
-        Button reg= (Button) findViewById(R.id.register);
+        name=findViewById(R.id.event_name);
+        e=findViewById(R.id.email);
+        phone=findViewById(R.id.phone);
+        password=findViewById(R.id.pass);
+        Button reg=  findViewById(R.id.register);
         signInButton = findViewById(R.id.login_with_google);
+        alreay_have=findViewById(R.id.reader_register_have_account);
 
+        alreay_have.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ReaderRegister.this,SignInUser.class));
+            }
+        });
         reg.setOnClickListener(this);
 
         //Google signIN method
@@ -135,10 +144,10 @@ public class ReaderRegister extends AppCompatActivity implements View.OnClickLis
 
     private void registerUser(){
 
-      final  String email=e.getText().toString().trim();
-      final  String pass=password.getText().toString().trim();
-      final  String uname=name.getText().toString();
-      final  String phoneNo=phone.getText().toString();
+      final  String email=e.getEditText().getText().toString().trim();
+      final  String pass=password.getEditText().getText().toString().trim();
+      final  String uname=name.getEditText().getText().toString();
+      final  String phoneNo=phone.getEditText().getText().toString();
 
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(this,"Please Enter Email",Toast.LENGTH_SHORT).show();
@@ -168,7 +177,7 @@ public class ReaderRegister extends AppCompatActivity implements View.OnClickLis
 
                     String id=user.getUid();
                     Author dataEnter=new Author(phoneNo,"default","defalut",
-                            email,uname,"default","default",""+ ServerValue.TIMESTAMP,"reader");
+                            email,uname,"default","default","offline","reader");
                     ref.child(id).setValue(dataEnter);
 
                     Toast.makeText(ReaderRegister.this,"Succesfully Registerd",Toast.LENGTH_SHORT).show();

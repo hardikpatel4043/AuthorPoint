@@ -38,7 +38,7 @@ public class FirebaseNotificationService extends FirebaseMessagingService {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.logo_main)
-                        .setContentTitle(notificationTitle + "foreground")
+                        .setContentTitle(notificationTitle)
                         .setContentText(body);
 
 //        Notification noti = new Notification.Builder(this)

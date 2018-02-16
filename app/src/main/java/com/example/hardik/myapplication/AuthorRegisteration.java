@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hardik.myapplication.POJO.Author;
@@ -43,7 +44,7 @@ public class AuthorRegisteration extends AppCompatActivity {
     private SignInButton signInButton;
     private GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 1;
-
+    TextView already_have;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,13 @@ public class AuthorRegisteration extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 registerUser();
+            }
+        });
+        already_have=findViewById(R.id.author_registeration_have_account);
+        already_have.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AuthorRegisteration.this,SignInUser.class));
             }
         });
 
@@ -180,11 +188,11 @@ public class AuthorRegisteration extends AppCompatActivity {
                     // String id=ref.push().getKey();
                     String id=user.getUid();
                     Author dataEnter=new Author(phone,"default","defalut",
-                            emailInput,uname,"default","default",""+ ServerValue.TIMESTAMP,"author");
+                            emailInput,uname,"default","default","offline","author");
                     mDatabase.child(id).setValue(dataEnter);
 
                     Toast.makeText(AuthorRegisteration.this,"Succesfully Registerd",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(),OTPVerification.class));
+                    startActivity(new Intent(getApplicationContext(),SignInUser.class));
                     finish();
                 }else{
                     Toast.makeText(AuthorRegisteration.this,"Registeration Error",Toast.LENGTH_SHORT).show();

@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.hardik.myapplication.POJO.CheckNetwork;
+import com.example.hardik.myapplication.POJO.NetworkChangeReceiver;
 import com.example.hardik.myapplication.ViewPager.InboxActivity;
 import com.example.hardik.myapplication.recycle_home.StartActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,9 +36,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
+
 
 import java.io.File;
 
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity
     DatabaseReference mUserRef;
     DrawerLayout drawerLayout;
     boolean doubleBackToExitPressedOnce = false;
+    NavigationView navigationView;
 
     @Override
     protected void onStart() {
@@ -58,9 +60,13 @@ public class MainActivity extends AppCompatActivity
         if(firebaseAuth.getCurrentUser()==null){
             startActivity(new Intent(getApplicationContext(),StartActivity.class));
             finish();
+        }else if(!firebaseAuth.getCurrentUser().isEmailVerified()){
+            startActivity(new Intent(getApplicationContext(),StartActivity.class));
+            finish();
         }else {
 
             mUserRef.child("online").setValue("true");
+
         }
 
     }//End of onStart() method
@@ -83,6 +89,7 @@ public class MainActivity extends AppCompatActivity
         firebaseAuth=FirebaseAuth.getInstance();
         user=FirebaseAuth.getInstance().getCurrentUser();
         drawerLayout=findViewById(R.id.drawer_layout);
+        navigationView=findViewById(R.id.nav_view);
 
 
         //-------SharedPreferences-------
@@ -157,37 +164,75 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction tx=getSupportFragmentManager().beginTransaction();
         tx.replace(R.id.frame,new HomePageFragment()).commit();
 
-
-        if(CheckNetwork.isInternetAvailable(MainActivity.this)){
-
-            Toast.makeText(MainActivity.this,"Internet connection avilable",Toast.LENGTH_SHORT).show();
-
+        //Check Internet Connection
+        if(!CheckNetwork.isInternetAvailable(getApplicationContext())){
+            Toast.makeText(MainActivity.this, "Network is not Available ",Toast.LENGTH_LONG).show();
         }
-
 
     }//End of onCreate() method
 
     //----------------------------------------------------------------------------------------------
 
+
+    private int checkNavigationMenuItem() {
+        Menu menu = navigationView.getMenu();
+        for (int i = 0; i < menu.size(); i++) {
+            if (menu.getItem(i).isChecked())
+                return i;
+        }
+        return -1;
+    }
+
     @Override
     public void onBackPressed() {
 
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
-        }
-        this.doubleBackToExitPressedOnce = true;
-        Snackbar snackbar = Snackbar.make(drawerLayout, "Press again to exit", Snackbar.LENGTH_LONG);
-        View snackbarView=snackbar.getView();
-        snackbarView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.colorPrimaryDark));
-        snackbar.show();
-        //Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce = false;
+        if (checkNavigationMenuItem() != 0) {
+            navigationView.setCheckedItem(R.id.nav_home_page);
+//            FragmentTransaction tx=getSupportFragmentManager().beginTransaction();
+//            tx.replace(R.id.frame,new HomePageFragment()).commit();
+            Fragment fragment=new HomePageFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame,fragment).commit();
+
+        } else {
+            if (doubleBackToExitPressedOnce) {
+                super.onBackPressed();
+                return;
             }
-        }, 2000);
+
+            this.doubleBackToExitPressedOnce = true;
+            Snackbar snackbar = Snackbar.make(drawerLayout, "Press again to exit", Snackbar.LENGTH_LONG);
+            View snackbarView=snackbar.getView();
+            snackbarView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.colorPrimaryDark));
+            snackbar.show();
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            }, 2000);
+
+
+        }
+
+//        if (doubleBackToExitPressedOnce) {
+//            super.onBackPressed();
+//            return;
+//        }
+//
+//        this.doubleBackToExitPressedOnce = true;
+//        Snackbar snackbar = Snackbar.make(drawerLayout, "Press again to exit", Snackbar.LENGTH_LONG);
+//        View snackbarView=snackbar.getView();
+//        snackbarView.setBackgroundColor(ContextCompat.getColor(getApplicationContext(),R.color.colorPrimaryDark));
+//        snackbar.show();
+//
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                doubleBackToExitPressedOnce = false;
+//            }
+//        }, 2000);
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -195,7 +240,7 @@ public class MainActivity extends AppCompatActivity
         } else {
             //super.onBackPressed();
         }
-    }
+    }//End of onBackPressed() method
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -229,14 +274,14 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         if (id == R.id.nav_home_page) {
             // Handle the camera action
-            setTitle("Dashboard");
+
             HomePageFragment fragment=new HomePageFragment();
             FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame,fragment);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_booklist) {
 
-            setTitle("Books");
+
             BookList fragment=new BookList();
             FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame,fragment);
@@ -244,7 +289,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_author_list) {
 
-            setTitle("Authors");
+
             AuthorList fragment=new AuthorList();
             FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame,fragment);
@@ -265,13 +310,12 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(getApplicationContext(),StartActivity.class));
             finish();
 
-        }else if(id==R.id.nav_event){
-
-          //  startActivity(new Intent(getApplicationContext(),EventUpload.class));
-
+//        }else if(id==R.id.nav_event){
+//
+//          //  startActivity(new Intent(getApplicationContext(),EventUpload.class));
+//
         }else if(id==R.id.nav_event_upload){
 
-            setTitle("Event Upload");
             EventUpload fragment=new EventUpload();
             FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame,fragment);
@@ -279,7 +323,6 @@ public class MainActivity extends AppCompatActivity
 
         }else if(id==R.id.nav_book_upload){
 
-            setTitle("Upload Book");
             BookUpload fragment=new BookUpload();
             FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame,fragment);

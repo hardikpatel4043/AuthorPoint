@@ -31,18 +31,23 @@
         android:weightSum="2"
         android:orientation="horizontal"
         android:gravity="center_horizontal"
-        android:visibility="gone"
-        >
+        android:visibility="gone">
         <Button
             android:id="@+id/author_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Register As Author"
-            />
+            android:layout_marginRight="05dp"
+            android:paddingLeft="05dp"
+            android:paddingRight="05dp"
+            android:background="@color/colorPrimaryDark" />
         <Button
             android:id="@+id/reader_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="05dp"
+            android:paddingRight="05dp"
+            android:background="@color/colorPrimaryDark"
             android:text="Register As Reader" />
     </LinearLayout>
 

@@ -30,13 +30,11 @@ public class BookPdfRead extends AppCompatActivity {
 
         String url= "https://firebasestorage.googleapis.com/v0/b/myapplication-4fcd2.appspot.com/o/BookPdf%2FJava%20IO%20(O'Reilly).pdf?alt=media&token=151479d0-73a5-4c6b-8cb8-c93222932e36";
 
-//        Intent intent = new Intent(Intent.ACTION_VIEW);
-//        intent.setDataAndType(Uri.parse(url), "application/pdf");
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        Intent newIntent = Intent.createChooser(intent, "Open File");
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.parse(url), "application/pdf");
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        Intent newIntent = Intent.createChooser(intent, "Open File");
 
-
-        pdfView.fromAsset(url).load();
         try {
            // startActivity(newIntent);
 

@@ -50,6 +50,4 @@ public class OfflineAuthorPoint extends Application {
 
     }
 
-
-
 }

@@ -18,20 +18,17 @@ public class CheckNetwork {
 
         if (info == null)
         {
-            Log.e(">>>>>>>","no internet connection");
             return false;
         }
         else
         {
             if(info.isConnected())
             {
-                Log.e(">>>>"," internet connection available...");
                 return true;
             }
             else
             {
-                Log.e(">>>>>>"," internet connection");
-                return true;
+                return false;
             }
         }
     }

@@ -1,8 +1,11 @@
 package com.example.hardik.myapplication;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,6 +14,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.hardik.myapplication.ItemClick.RecyclerItemClickListener;
+import com.example.hardik.myapplication.POJO.Book;
+import com.example.hardik.myapplication.recycle_home.BookAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -22,6 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +38,7 @@ public class AuthorDisplayProfile extends AppCompatActivity {
     TextView name,email,phone;
     ImageView image;
     Button mFriendRequestButton,mDeclineRequetButton;
+    ArrayList<Book> bookList=new ArrayList<>();
     //Firebase
     DatabaseReference mRef;
 
@@ -42,6 +50,8 @@ public class AuthorDisplayProfile extends AppCompatActivity {
     DatabaseReference mRootRef;
     FirebaseUser mCurrentUser;
     String mCurrent_state;
+    String viewUserId;
+    BookAdapter bAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +60,7 @@ public class AuthorDisplayProfile extends AppCompatActivity {
 
         name=findViewById(R.id.author_in_detail_name);
         email=findViewById(R.id.author_in_detail_email);
-        phone=findViewById(R.id.author_in_detail_phone);
+       // phone=findViewById(R.id.author_in_detail_phone);
         image=findViewById(R.id.author_in_detail_profile_image);
         mFriendRequestButton=findViewById(R.id.author_display_friend_button);
         mDeclineRequetButton=findViewById(R.id.author_display_decline_btn);
@@ -63,7 +73,7 @@ public class AuthorDisplayProfile extends AppCompatActivity {
         mNotificationDatabase=FirebaseDatabase.getInstance().getReference("notifications");
         mCurrentUser= FirebaseAuth.getInstance().getCurrentUser();
 
-        final String viewUserId=getIntent().getStringExtra("AuthorId");
+        viewUserId=getIntent().getStringExtra("AuthorId");
 
         mCurrent_state="not_friends";
 
@@ -73,10 +83,21 @@ public class AuthorDisplayProfile extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 name.setText(dataSnapshot.child("name").getValue().toString());
-                email.setText(dataSnapshot.child("email").getValue().toString());
-                phone.setText(dataSnapshot.child("phone").getValue().toString());
-                Glide.with(getApplicationContext()).load(dataSnapshot.child("image").getValue().toString())
-                        .apply(RequestOptions.circleCropTransform()).into(image);
+                email.setText("Email : "+dataSnapshot.child("email").getValue().toString());
+               //  phone.setText(dataSnapshot.child("phone").getValue().toString());
+
+                String getImage=dataSnapshot.child("image").getValue().toString();
+                if(getImage.equals("default")){
+
+                    Glide.with(getApplicationContext()).load(R.drawable.default_avatar)
+                            .apply(RequestOptions.circleCropTransform()).into(image);
+
+                }else{
+
+                    Glide.with(getApplicationContext()).load(getImage)
+                            .apply(RequestOptions.circleCropTransform()).into(image);
+
+                }
 
                 //----------------REQUEST RECEIVED CHECK FOR REQUEST------------------------
                 mFriendRequestDatabase.child(mCurrentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -201,7 +222,7 @@ public class AuthorDisplayProfile extends AppCompatActivity {
                             if(databaseError==null){
                                 mCurrent_state="friends";
                                 mFriendRequestButton.setText("UnFriend");
-                                mDeclineRequetButton.setVisibility(View.INVISIBLE);
+                                mDeclineRequetButton.setVisibility(View.GONE);
                             }else{
                                 Toast.makeText(AuthorDisplayProfile.this,""+databaseError.getMessage(),Toast.LENGTH_SHORT).show();
                             }
@@ -258,7 +279,7 @@ public class AuthorDisplayProfile extends AppCompatActivity {
                                                 mCurrent_state="not_friends";
                                                 mFriendRequestButton.setText("send Friend Request");
 
-                                                mDeclineRequetButton.setVisibility(View.INVISIBLE);
+                                                mDeclineRequetButton.setVisibility(View.GONE);
                                             }
                                         });
                             }
@@ -266,7 +287,49 @@ public class AuthorDisplayProfile extends AppCompatActivity {
             }
         });//End of mDeclineRequest method
 
+        RecyclerView recyclerView =  findViewById(R.id.author_display_recycle_book);
+        bAdapter = new BookAdapter(getApplicationContext(),bookList);
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(bAdapter);
+        prepareBookData();
+
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getApplicationContext(),
+                recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent inDetail=new Intent(getApplicationContext(),BookDescription.class);
+                inDetail.putExtra("AuthorId",bookList.get(position));
+                startActivity(inDetail);
+            }
+        }));
+
 
         //---------------
     }//End of onCreate() method
+
+    private void prepareBookData() {
+
+        mRootRef.child("book").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                bookList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Book object = snapshot.getValue(Book.class);
+                    if (object.getAuthorId().equals(viewUserId)) {
+                        bookList.add(object);
+                    }
+
+                }
+                bAdapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
 }//End of AuthorDisplayProfile

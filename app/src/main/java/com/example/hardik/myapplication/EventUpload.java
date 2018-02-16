@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.hardik.myapplication.POJO.CheckNetwork;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -35,13 +36,14 @@ public class EventUpload extends Fragment {
         // Inflate the layout for this fragment
        View rootView= inflater.inflate(R.layout.event_upload, container, false);
 
+       getActivity().setTitle("Upload Event");
        rootRef=FirebaseDatabase.getInstance().getReference();
 
        eventName=rootView.findViewById(R.id.event_name);
        eventPlace=rootView.findViewById(R.id.event_place);
        eventTime=rootView.findViewById(R.id.event_time);
        eventDate=rootView.findViewById(R.id.event_date);
-       eventDescription=rootView.findViewById(R.id.event_description);
+       eventDescription=rootView.findViewById(R.id.event_about_description_);
 
        eventSubmitButton=rootView.findViewById(R.id.event_upload_submit);
 
@@ -49,8 +51,12 @@ public class EventUpload extends Fragment {
            @Override
            public void onClick(View view) {
 
-               String pushKey=rootRef.push().getKey();
+               //Check Internet Connection
+               if(!CheckNetwork.isInternetAvailable(getActivity())){
+                   Toast.makeText(getActivity(), "Network is not Available ",Toast.LENGTH_LONG).show();
+               }
 
+               String pushKey=rootRef.push().getKey();
                HashMap uploadData=new HashMap();
                uploadData.put("name",eventName.getEditText().getText().toString());
                uploadData.put("place",eventPlace.getEditText().getText().toString());

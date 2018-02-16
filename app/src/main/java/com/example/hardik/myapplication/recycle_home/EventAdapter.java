@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.hardik.myapplication.POJO.Event;
 import com.example.hardik.myapplication.R;
 
 import java.util.List;

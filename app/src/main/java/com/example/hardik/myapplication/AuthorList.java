@@ -8,9 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.hardik.myapplication.ItemClick.RecyclerItemClickListener;
 import com.example.hardik.myapplication.POJO.Author;
+import com.example.hardik.myapplication.POJO.CheckNetwork;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -47,6 +49,13 @@ public class AuthorList extends android.support.v4.app.Fragment {
 
         View rootView=inflater.inflate(R.layout.author_list_vertical, container, false);
         recyclerView = rootView.findViewById(R.id.recycler_view_author_list);
+
+        getActivity().setTitle("AuthorList");
+
+        //Check Internet Connection
+        if(!CheckNetwork.isInternetAvailable(getActivity())){
+            Toast.makeText(getActivity(), "Network is not Available ",Toast.LENGTH_SHORT).show();
+        }
 
         mAdapter = new AuthorListAdapter(getActivity(),authorList);
         recyclerView.setHasFixedSize(true);

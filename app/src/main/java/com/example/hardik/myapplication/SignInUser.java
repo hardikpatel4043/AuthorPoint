@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.hardik.myapplication.POJO.CheckNetwork;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -99,25 +100,42 @@ public class SignInUser extends AppCompatActivity  {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if(task.isSuccessful()){
+
+                            DatabaseReference mUser= FirebaseDatabase.getInstance().getReference("author");
                             FirebaseUser user=mAuth.getCurrentUser();
                             String current_user_id=user.getUid();
 
-                            DatabaseReference mUser= FirebaseDatabase.getInstance().getReference("author");
+                            if(user.isEmailVerified()){
 
-                            String token_id= FirebaseInstanceId.getInstance().getToken();
-                            mUser.child(current_user_id).child("device_token").setValue(token_id);
+                                String token_id= FirebaseInstanceId.getInstance().getToken();
+                                mUser.child(current_user_id).child("device_token").setValue(token_id);
+                                progressBar.setVisibility(View.GONE);
+
+                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                                Intent i=new Intent(SignInUser.this,MainActivity.class);
+                                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(i);
+                            }else{
+
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(SignInUser.this,"Please verify your email address",Toast.LENGTH_SHORT).show();
+                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                            }
+
+                        }else if(!CheckNetwork.isInternetAvailable(getApplicationContext())){
+
+                            //Check Internet Connection
+                            Toast.makeText(SignInUser.this, "Network is not Available ",Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
-
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                            Intent i=new Intent(SignInUser.this,MainActivity.class);
-                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(i);
 
                         }else{
-                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
                             Toast.makeText(SignInUser.this,"Invalid Email or password",Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
-                        }
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+                        }//End of if(task.isSuccessful())
                     }
                 });
 

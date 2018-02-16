@@ -1,4 +1,4 @@
-package com.example.hardik.myapplication.recycle_home;
+package com.example.hardik.myapplication.POJO;
 
 /**
  * Created by Hardik on 12/7/2017.

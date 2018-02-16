@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,7 @@ import com.example.hardik.myapplication.POJO.Author;
 import com.example.hardik.myapplication.POJO.Book;
 import com.example.hardik.myapplication.recycle_home.AuthorAdapter;
 import com.example.hardik.myapplication.recycle_home.BookAdapter;
-import com.example.hardik.myapplication.recycle_home.Event;
+import com.example.hardik.myapplication.POJO.Event;
 import com.example.hardik.myapplication.recycle_home.EventAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,6 +41,7 @@ public class HomePageFragment extends android.support.v4.app.Fragment {
     private List<Author> authorList = new ArrayList<>();
     private List<Event> eventList = new ArrayList<>();
     private List<String> authorIdList=new ArrayList<>();
+    private List<String> eventIdList=new ArrayList<>();
 
     private RecyclerView recyclerView1;
     private RecyclerView recyclerView2;
@@ -62,6 +62,7 @@ public class HomePageFragment extends android.support.v4.app.Fragment {
 
         mRoot= FirebaseDatabase.getInstance().getReference();
 
+        getActivity().setTitle("Dashboard");
         recyclerView1 =  (RecyclerView) rootView.findViewById(R.id.recycler_book);
         bAdapter = new BookAdapter(getActivity(),bookList);
         recyclerView1.setHasFixedSize(true);
@@ -107,7 +108,17 @@ public class HomePageFragment extends android.support.v4.app.Fragment {
         //   RecyclerView.LayoutManager eLayoutManager = new GridLayoutManager(this,1,GridLayoutManager.HORIZONTAL,false);
         recyclerView3.setLayoutManager(eLayoutManager);
         recyclerView3.setAdapter(eAdapter);
-        
+
+        recyclerView3.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(),
+                recyclerView3, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent inDetail=new Intent(getActivity(),EventDescription.class);
+                inDetail.putExtra("Event",eventIdList.get(position));
+                startActivity(inDetail);
+            }
+        }));
+
         prepareAuthorData();
 
         return rootView;
@@ -150,11 +161,14 @@ public class HomePageFragment extends android.support.v4.app.Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 eventList.clear();
+                eventIdList.clear();
 
                 for(DataSnapshot snapshot:dataSnapshot.getChildren()){
 
+                    eventIdList.add(snapshot.getKey());
                     Event eventData=snapshot.getValue(Event.class);
                     eventList.add(eventData);
+
                 }
 
                 eAdapter.notifyDataSetChanged();
