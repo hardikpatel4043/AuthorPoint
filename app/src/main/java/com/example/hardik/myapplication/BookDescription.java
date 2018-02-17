@@ -127,6 +127,7 @@ public class BookDescription extends AppCompatActivity {
 
     }//End of onCreate() method
 
+    
     private void processPayment() {
 
         PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(String.valueOf(amountPay)),"USD","Pay to AuthorPoint",PayPalPayment.PAYMENT_INTENT_SALE);
