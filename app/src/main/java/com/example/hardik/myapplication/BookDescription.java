@@ -127,7 +127,7 @@ public class BookDescription extends AppCompatActivity {
 
     }//End of onCreate() method
 
-    
+
     private void processPayment() {
 
         PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(String.valueOf(amountPay)),"USD","Pay to AuthorPoint",PayPalPayment.PAYMENT_INTENT_SALE);
@@ -136,7 +136,6 @@ public class BookDescription extends AppCompatActivity {
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT,payPalPayment);
         startActivityForResult(intent,PAYPAL_REQUEST_CODE);
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

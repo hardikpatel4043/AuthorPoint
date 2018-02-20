@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity
                         editor.putString("user_login_type","normal_account");
                         editor.putString("user_type",dataSnapshot.child("type").getValue().toString());
                         editor.commit();
-                        Glide.with(getApplicationContext()).load(dataSnapshot.child("image").getValue()).apply(RequestOptions.circleCropTransform()).into(profileImage);
+                        Glide.with(getApplicationContext()).load(R.drawable.default_avatar).apply(RequestOptions.circleCropTransform()).into(profileImage);
                         userName.setText(dataSnapshot.child("name").getValue().toString());
 
                         //------------------------------------------------------------------------
@@ -152,10 +152,9 @@ public class MainActivity extends AppCompatActivity
             }else{
                 editor.putString("user_login_type","google");
                 editor.commit();
+                userName.setText(user.getDisplayName());
+                Glide.with(getApplicationContext()).load(photoUrl).apply(RequestOptions.circleCropTransform()).into(profileImage);
             }
-
-            userName.setText(user.getDisplayName());
-            Glide.with(getApplicationContext()).load(photoUrl).apply(RequestOptions.circleCropTransform()).into(profileImage);
 
         }
         navigationView.setNavigationItemSelectedListener(this);

@@ -79,8 +79,9 @@ public class ProfileSettings extends AppCompatActivity {
                 String imageUrl=dataSnapshot.getValue().toString();
                 if(imageUrl.equals("default")){
                     Glide.with(getApplicationContext()).load(R.drawable.default_avatar).apply(RequestOptions.circleCropTransform()).into(profile);
+                }else{
+                    Glide.with(getApplicationContext()).load(imageUrl).apply(RequestOptions.circleCropTransform()).into(profile);
                 }
-                Glide.with(getApplicationContext()).load(imageUrl).apply(RequestOptions.circleCropTransform()).into(profile);
 
             }
 
