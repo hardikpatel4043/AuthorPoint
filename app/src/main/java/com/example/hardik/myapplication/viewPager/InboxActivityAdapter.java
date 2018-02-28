@@ -1,4 +1,4 @@
-package com.example.hardik.myapplication.ViewPager;
+package com.example.hardik.myapplication.viewPager;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

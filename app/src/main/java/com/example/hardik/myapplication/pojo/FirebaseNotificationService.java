@@ -1,6 +1,5 @@
-package com.example.hardik.myapplication.POJO;
+package com.example.hardik.myapplication.pojo;
 
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -25,27 +24,21 @@ public class FirebaseNotificationService extends FirebaseMessagingService {
         super.onMessageReceived(remoteMessage);
 
         currrentUser= FirebaseAuth.getInstance().getCurrentUser();
-        String current_user_id=currrentUser.getUid().toString();
+        String current_user_id=currrentUser.getUid();
 
         String notificationTitle=remoteMessage.getNotification().getTitle();
         String body=remoteMessage.getNotification().getBody();
         String click=remoteMessage.getNotification().getClickAction();
 
-        String targetUser=remoteMessage.getData().get("sendTOAuthorId").toString();
+        String targetUser=remoteMessage.getData().get("sendTOAuthorId");
 
         int mNotificationId = (int)System.currentTimeMillis();
 
         NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(this)
+                new NotificationCompat.Builder(this,"channelID")
                         .setSmallIcon(R.drawable.logo_main)
                         .setContentTitle(notificationTitle)
                         .setContentText(body);
-
-//        Notification noti = new Notification.Builder(this)
-//                .setSmallIcon(R.drawable.logo_main)
-//                .setContentTitle("Friend request")
-//                .setContentText("You've recieved a new friend request")
-//                .build();
 
         Intent resultIntent = new Intent(click);
 

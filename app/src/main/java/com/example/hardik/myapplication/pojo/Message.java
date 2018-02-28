@@ -1,4 +1,4 @@
-package com.example.hardik.myapplication.POJO;
+package com.example.hardik.myapplication.pojo;
 
 /**
  * Created by Hardik on 1/3/2018.

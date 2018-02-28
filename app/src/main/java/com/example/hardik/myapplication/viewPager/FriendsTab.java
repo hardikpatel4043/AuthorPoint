@@ -1,4 +1,4 @@
-package com.example.hardik.myapplication.ViewPager;
+package com.example.hardik.myapplication.viewPager;
 
 
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.hardik.myapplication.POJO.Author;
+import com.example.hardik.myapplication.pojo.Author;
 import com.example.hardik.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

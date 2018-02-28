@@ -1,16 +1,12 @@
-package com.example.hardik.myapplication.ViewPager;
+package com.example.hardik.myapplication.viewPager;
 
-import android.content.Intent;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
-import com.example.hardik.myapplication.HomePageFragment;
 import com.example.hardik.myapplication.R;
-import com.example.hardik.myapplication.recycle_home.StartActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;

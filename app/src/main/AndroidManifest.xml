@@ -8,13 +8,14 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".POJO.OfflineAuthorPoint"
+        android:name=".pojo.OfflineAuthorPoint"
         android:allowBackup="true"
         android:icon="@drawable/logo_main"
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo_main"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,24 +31,23 @@
         <activity android:name=".AuthorRegisteration" />
         <activity android:name=".AuthorDisplayProfile" />
         <activity
-            android:name=".ViewPager.InboxActivity"
+            android:name=".viewPager.InboxActivity"
             android:parentActivityName=".MainActivity">
             <intent-filter>
                 <action android:name="com.example.hardik.myapplication" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <service android:name=".POJO.FirebaseNotificationService">
+        <service android:name=".pojo.FirebaseNotificationService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
         <activity
-            android:name=".ViewPager.ChatActivity"
-            android:parentActivityName=".ViewPager.InboxActivity" />
+            android:name=".viewPager.ChatActivity"
+            android:parentActivityName=".viewPager.InboxActivity" />
         <activity android:name=".BookPdfRead" />
         <activity android:name=".ProfileSettings" />
         <activity
@@ -59,11 +59,10 @@
             android:theme="@style/Theme.Transparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EventDescription"></activity>
+        <activity android:name=".EventDescription"/>
     </application>
 
 </manifest>

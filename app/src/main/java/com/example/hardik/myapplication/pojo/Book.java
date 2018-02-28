@@ -1,4 +1,4 @@
-package com.example.hardik.myapplication.POJO;
+package com.example.hardik.myapplication.pojo;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -43,6 +43,7 @@ public class Book implements Parcelable {
         description=in.readString();
         Isbn=in.readString();
         rating=in.readInt();
+        pdfLink=in.readString();
     }
 
 
@@ -61,7 +62,8 @@ public class Book implements Parcelable {
         parcel.writeString(this.publication);
         parcel.writeString(this.description);
         parcel.writeString(this.Isbn);
-        parcel.writeInt(rating);
+        parcel.writeInt(this.rating);
+        parcel.writeString(this.pdfLink);
 
     }
 
@@ -98,6 +100,8 @@ public class Book implements Parcelable {
         private String book_type;
 
         private Review review;
+
+        private String pdfLink;
 
     public String getPublication() {
         return publication;
@@ -228,6 +232,13 @@ public class Book implements Parcelable {
             this.image = image;
          }
 
+        public String getPdfLink() {
+            return pdfLink;
+        }
+
+        public void setPdfLink(String pdfLink) {
+            this.pdfLink = pdfLink;
+        }
 
     }
 

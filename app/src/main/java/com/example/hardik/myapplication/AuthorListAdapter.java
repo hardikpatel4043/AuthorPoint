@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.hardik.myapplication.POJO.Author;
+import com.example.hardik.myapplication.pojo.Author;
 
 import java.util.List;
 /**

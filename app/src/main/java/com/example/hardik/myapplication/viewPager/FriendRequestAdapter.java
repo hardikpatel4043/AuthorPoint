@@ -1,4 +1,4 @@
-package com.example.hardik.myapplication.ViewPager;
+package com.example.hardik.myapplication.viewPager;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.hardik.myapplication.POJO.Author;
+import com.example.hardik.myapplication.pojo.Author;
 import com.example.hardik.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;

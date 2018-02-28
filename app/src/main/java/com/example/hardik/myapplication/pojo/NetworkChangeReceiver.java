@@ -1,4 +1,4 @@
-package com.example.hardik.myapplication.POJO;
+package com.example.hardik.myapplication.pojo;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

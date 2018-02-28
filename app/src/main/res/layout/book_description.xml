@@ -136,12 +136,10 @@
                     android:id="@+id/book_description_isbn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="24dp"
                     android:text="ISBN No"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/readmore" />
 
@@ -152,8 +150,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="24dp"
                     android:text="Publication"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/book_description_isbn" />
 
@@ -164,8 +161,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="24dp"
                     android:text="Book Type"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/book_descrpiton_publication" />
 
@@ -177,8 +173,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="24dp"
                     android:text="Language"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
+                    android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/book_description_type" />
@@ -213,9 +208,9 @@
             android:layout_height="51dp"
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="60dp"
-            android:layout_marginLeft="05dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
+            android:layout_marginLeft="05dp"
             android:background="@color/colorPrimaryDark"
             android:text="Buy Book"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -223,8 +218,6 @@
             app:layout_constraintStart_toEndOf="@+id/book_description_read"
             app:layout_constraintTop_toBottomOf="@+id/cardView2"
             app:layout_constraintVertical_bias="0.0" />
-
-
 
     </android.support.constraint.ConstraintLayout>
 

@@ -2,23 +2,18 @@ package com.example.hardik.myapplication;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.hardik.myapplication.POJO.Book;
-import com.example.hardik.myapplication.POJO.Reader;
-import com.example.hardik.myapplication.POJO.Review;
+import com.example.hardik.myapplication.pojo.Book;
+import com.example.hardik.myapplication.pojo.Review;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class EnterDataTemp extends AppCompatActivity {
 

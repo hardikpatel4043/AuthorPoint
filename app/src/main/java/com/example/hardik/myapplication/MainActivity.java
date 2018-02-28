@@ -2,7 +2,6 @@ package com.example.hardik.myapplication;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -16,7 +15,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,9 +24,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.hardik.myapplication.POJO.CheckNetwork;
-import com.example.hardik.myapplication.POJO.NetworkChangeReceiver;
-import com.example.hardik.myapplication.ViewPager.InboxActivity;
+import com.example.hardik.myapplication.pojo.CheckNetwork;
+import com.example.hardik.myapplication.viewPager.InboxActivity;
 import com.example.hardik.myapplication.recycle_home.StartActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -37,9 +34,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-
-import java.io.File;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -120,8 +114,6 @@ public class MainActivity extends AppCompatActivity
         if(firebaseAuth.getCurrentUser()!=null){
             Uri photoUrl=user.getPhotoUrl();
             text.setText(user.getEmail());
-
-
 
             if(photoUrl==null){
                 mUserRef.addValueEventListener(new ValueEventListener() {

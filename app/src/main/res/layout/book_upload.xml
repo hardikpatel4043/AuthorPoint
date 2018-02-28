@@ -178,5 +178,15 @@
             android:layout_marginTop="10dp"
             android:src="@android:drawable/ic_menu_upload" />
 
+        <ProgressBar
+            android:id="@+id/progressBar_book_upload"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_above="@+id/upload_image_button"
+            android:layout_centerHorizontal="true" />
+
     </RelativeLayout>
+
 </ScrollView>

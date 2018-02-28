@@ -1,4 +1,4 @@
-package com.example.hardik.myapplication.POJO;
+package com.example.hardik.myapplication.pojo;
 
 import android.app.Application;
 import com.google.firebase.auth.FirebaseAuth;
@@ -7,10 +7,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
-
-import java.io.File;
 
 /**
  * Created by Hardik on 12/29/2017.

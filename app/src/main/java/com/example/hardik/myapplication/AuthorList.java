@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.hardik.myapplication.ItemClick.RecyclerItemClickListener;
-import com.example.hardik.myapplication.POJO.Author;
-import com.example.hardik.myapplication.POJO.CheckNetwork;
+import com.example.hardik.myapplication.pojo.Author;
+import com.example.hardik.myapplication.pojo.CheckNetwork;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

@@ -1,4 +1,4 @@
-package com.example.hardik.myapplication.POJO;
+package com.example.hardik.myapplication.pojo;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -13,9 +13,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.hardik.myapplication.ItemClick.RecyclerItemClickListener;
-import com.example.hardik.myapplication.POJO.Book;
-import com.example.hardik.myapplication.POJO.CheckNetwork;
-import com.example.hardik.myapplication.ViewPager.ChatActivity;
+import com.example.hardik.myapplication.pojo.Book;
+import com.example.hardik.myapplication.pojo.CheckNetwork;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

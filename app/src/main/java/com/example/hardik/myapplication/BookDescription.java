@@ -14,12 +14,14 @@ import android.widget.Toast;
 
 import com.borjabravo.readmoretextview.ReadMoreTextView;
 import com.bumptech.glide.Glide;
-import com.example.hardik.myapplication.POJO.Book;
+import com.example.hardik.myapplication.pojo.Book;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
@@ -39,6 +41,7 @@ public class BookDescription extends AppCompatActivity {
     ReadMoreTextView descriptionReadMore;
     Button buyBook;
     int amountPay;
+    StorageReference storageReference;
 
     //Paypal account
     private static final int PAYPAL_REQUEST_CODE = 7171;
@@ -52,8 +55,9 @@ public class BookDescription extends AppCompatActivity {
         setContentView(R.layout.book_description);
 
         mRef=FirebaseDatabase.getInstance().getReference("author");
+        storageReference= FirebaseStorage.getInstance().getReference().child("BookPdf");
 
-        Book book = getIntent().getParcelableExtra("AuthorId");
+        final Book book = getIntent().getParcelableExtra("AuthorId");
 
         Button readButton=findViewById(R.id.book_description_read);
         buyBook=findViewById(R.id.book_description_buy);
@@ -94,12 +98,12 @@ public class BookDescription extends AppCompatActivity {
             }
         });
 
-
         readButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String url= "https://firebasestorage.googleapis.com/v0/b/myapplication-4fcd2.appspot.com/o/BookPdf%2FJava%20IO%20(O'Reilly).pdf?alt=media&token=151479d0-73a5-4c6b-8cb8-c93222932e36";
+                String bookUrl=storageReference.getDownloadUrl().toString();
+                String url= book.getPdfLink();
 
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setDataAndType(Uri.parse(url), "application/pdf");

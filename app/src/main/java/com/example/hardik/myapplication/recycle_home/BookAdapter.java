@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.hardik.myapplication.POJO.Book;
+import com.example.hardik.myapplication.pojo.Book;
 import com.example.hardik.myapplication.R;
 
 import java.util.List;

@@ -11,11 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.hardik.myapplication.ItemClick.RecyclerItemClickListener;
-import com.example.hardik.myapplication.POJO.Author;
-import com.example.hardik.myapplication.POJO.Book;
+import com.example.hardik.myapplication.pojo.Author;
+import com.example.hardik.myapplication.pojo.Book;
 import com.example.hardik.myapplication.recycle_home.AuthorAdapter;
 import com.example.hardik.myapplication.recycle_home.BookAdapter;
-import com.example.hardik.myapplication.POJO.Event;
+import com.example.hardik.myapplication.pojo.Event;
 import com.example.hardik.myapplication.recycle_home.EventAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

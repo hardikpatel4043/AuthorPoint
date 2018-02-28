@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.hardik.myapplication.POJO.CheckNetwork;
+import com.example.hardik.myapplication.pojo.CheckNetwork;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 

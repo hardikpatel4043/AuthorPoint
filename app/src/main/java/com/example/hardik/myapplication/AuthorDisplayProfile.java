@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.hardik.myapplication.ItemClick.RecyclerItemClickListener;
-import com.example.hardik.myapplication.POJO.Book;
+import com.example.hardik.myapplication.pojo.Book;
 import com.example.hardik.myapplication.recycle_home.BookAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
