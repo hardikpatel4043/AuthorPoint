@@ -16,7 +16,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="facebook_app_id">1909541186041817</string>
     <string name="fb_login_protocol_scheme">fb1909541186041817</string>
     <string name="name">Name:</string>
@@ -54,6 +53,13 @@
 
     <string name="chetan_bhagat">Chetan Bhagat</string>
     <string name="authorpoint">AuthorPoint</string>
+    <string name="book_name">Book Name</string>
+    <string name="book_language">Book Language</string>
+    <string name="price">Price</string>
+    <string name="book_image">Book Image</string>
+    <string name="upload_book">Upload Book</string>
+    <string name="select_pdf">Select Pdf</string>
+    <string name="isbn_10">ISBN-10</string>
 
     <!--this filed are enter for render problem solve for xml-->
     <item name="visible" type="id" />

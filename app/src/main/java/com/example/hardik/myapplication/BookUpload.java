@@ -28,9 +28,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ObjectStreamException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
@@ -41,9 +43,7 @@ import static android.app.Activity.RESULT_OK;
  */
 public class BookUpload extends Fragment {
 
-    private ImageView uploadPdf,uploadImage;
     private TextInputLayout bookImage,bookPdf,name,type,language,publication,price,description,ISBN;
-    private Button submit;
     private ProgressBar progressBar;
 
     private final int PICK_IMAGE_REQUEST=10;
@@ -73,8 +73,8 @@ public class BookUpload extends Fragment {
         mRootStorage= FirebaseStorage.getInstance().getReference();
         mCurrentUser= FirebaseAuth.getInstance().getCurrentUser();
 
-        uploadImage=rootView.findViewById(R.id.upload_image_button);
-        uploadPdf=rootView.findViewById(R.id.upload_pdf_button);
+        ImageView uploadImage=rootView.findViewById(R.id.upload_image_button);
+        ImageView uploadPdf=rootView.findViewById(R.id.upload_pdf_button);
         bookImage=rootView.findViewById(R.id.book_upload_image);
         bookPdf=rootView.findViewById(R.id.book_upload_select_pdf);
         name=rootView.findViewById(R.id.book_upload_name);
@@ -86,7 +86,7 @@ public class BookUpload extends Fragment {
         ISBN=rootView.findViewById(R.id.book_upload_ISBN);
 
         progressBar=rootView.findViewById(R.id.progressBar_book_upload);
-        submit=rootView.findViewById(R.id.book_upload_submit);
+        Button submit=rootView.findViewById(R.id.book_upload_submit);
 
         uploadImage.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -8,8 +8,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/book_description_image"
@@ -21,7 +20,8 @@
             android:src="@drawable/halfgirl"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/todo"/>
 
         <TextView
             android:id="@+id/book_description_name"
@@ -111,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:text="Description"
+                    android:text="@string/description"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -138,7 +138,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="24dp"
-                    android:text="ISBN No"
+                    android:text="@string/isbn_no"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/readmore" />
@@ -149,7 +149,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="24dp"
-                    android:text="Publication"
+                    android:text="@string/publication"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/book_description_isbn" />
@@ -160,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="24dp"
-                    android:text="Book Type"
+                    android:text="@string/book_type"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/book_descrpiton_publication" />
@@ -194,7 +194,7 @@
             android:background="@color/colorPrimaryDark"
             android:gravity="center"
             android:padding="10dp"
-            android:text="Read Book"
+            android:text="@string/read_book"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/book_description_buy"
             app:layout_constraintStart_toStartOf="parent"
@@ -212,7 +212,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginLeft="05dp"
             android:background="@color/colorPrimaryDark"
-            android:text="Buy Book"
+            android:text="@string/buy_book"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/book_description_read"

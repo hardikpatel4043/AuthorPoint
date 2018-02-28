@@ -25,7 +25,6 @@ import com.google.firebase.iid.FirebaseInstanceId;
 public class SignInUser extends AppCompatActivity  {
 
     private EditText email,password;
-    private Button submit,forgot;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
 
@@ -38,8 +37,8 @@ public class SignInUser extends AppCompatActivity  {
 
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
-        submit = (Button) findViewById(R.id.submit);
-        forgot = findViewById(R.id.reset);
+        Button submit = (Button) findViewById(R.id.submit);
+        Button forgot = findViewById(R.id.reset);
         progressBar=findViewById(R.id.progressBar2);
 
 
